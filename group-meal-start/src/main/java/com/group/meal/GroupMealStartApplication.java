@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication(scanBasePackages = {"com.group.meal"})
 @PropertySource(value = "classpath:application.properties")
-@ImportResource(value = {"classpath:mybatis-config.xml","classpath:velocity-conf.xml"})
+@ImportResource(value = {"classpath:spring-mybatis-config.xml","classpath:velocity-conf.xml"})
 @EnableTransactionManagement
 public class GroupMealStartApplication {
 

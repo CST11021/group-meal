@@ -1,7 +1,10 @@
 package com.group.meal.dao.mapper;
 
 import com.group.meal.dao.dataobject.GroupUser;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface GroupUserMapper {
     int deleteByPrimaryKey(Long id);
 
