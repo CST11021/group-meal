@@ -9,16 +9,16 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.group.meal</groupId>
     <artifactId>group-meal-service</artifactId>
 
-    <dependencies>
 
+    <dependencies>
         <dependency>
             <groupId>com.group.meal</groupId>
             <artifactId>group-meal-dao</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
     </dependencies>
 
 </project>

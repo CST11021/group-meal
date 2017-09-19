@@ -11,8 +11,8 @@
         <module>group-meal-start</module>
         <module>group-meal-common</module>
         <module>group-meal-dao</module>
-        <module>group-meal-service</module>
         <module>group-meal-controller</module>
+        <module>group-meal-service</module>
     </modules>
     <packaging>pom</packaging>
 
