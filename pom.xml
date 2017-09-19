@@ -35,6 +35,8 @@
         <spring.version>4.3.2.RELEASE</spring.version>
         <spring-boot>1.5.7.RELEASE</spring-boot>
         <spring-boot-starter-velocity>1.4.7.RELEASE</spring-boot-starter-velocity>
+        <mysql-connector-java>5.1.43</mysql-connector-java>
+        <commons-dbcp>1.4</commons-dbcp>
     </properties>
 
     <dependencyManagement>
