@@ -16,13 +16,16 @@ import org.springframework.web.servlet.ModelAndView;
 public class HelloController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger monitorLogger = LoggerFactory.getLogger("monitor");
 
     @Autowired
     private GroupUserMapper groupUserMapper;
 
     @RequestMapping(value = "/hello")
     public ModelAndView hello(ModelMap modelMap) {
-        logger.info("just a test!");
+        logger.info("logger-info:just a test!");
+        logger.warn("logger-info:just a test!");
+        logger.error("logger-info:just a test!");
         ModelAndView mav = new ModelAndView("index");
         modelMap.addAttribute("message", "hello,world!");
         return mav;
