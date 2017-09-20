@@ -10,7 +10,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @Controller
 public class HelloController {
@@ -31,9 +36,19 @@ public class HelloController {
         return mav;
     }
 
+    @RequestMapping(value = "/test")
+    public ModelAndView testPage(ModelMap modelMap) {
+        ModelAndView mav = new ModelAndView("errorPage");
+        return mav;
+    }
+
     @RequestMapping(value = "/testUserMapper")
     public @ResponseBody
     GroupUser testUserMapper() {
+        if(true) {
+            throw new RuntimeException("123");
+        }
         return groupUserMapper.selectByPrimaryKey(1L);
     }
+
 }
