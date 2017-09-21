@@ -37,6 +37,7 @@
         <spring-boot-starter-velocity>1.4.7.RELEASE</spring-boot-starter-velocity>
         <mysql-connector-java>5.1.43</mysql-connector-java>
         <commons-dbcp>1.4</commons-dbcp>
+        <commons-lang3>3.6</commons-lang3>
     </properties>
 
     <dependencyManagement>
@@ -74,6 +75,14 @@
                 <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
+
+            <!--commons-lang3工具类-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>
