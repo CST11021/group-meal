@@ -122,7 +122,12 @@
         },
 
         render: function() {
-            return <button style="cursor: pointer">{this.state.data}</button>;
+            return (
+                <div>
+                    <button title="123" style={{width:300,height:20,cursor: "pointer"}}>{this.state.data}</button>
+                    <button class="layui-btn">{this.state.data}</button>
+                </div>
+            );
 
         }
     });
