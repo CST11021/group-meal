@@ -24,12 +24,8 @@ public class LayUIController {
 
     @RequestMapping("/ajaxCheckBox")
     @ResponseBody
-    public Map<String, String> ajaxCheckBox() {
-
-        Map<String, String> data = new HashMap();
-        data.put("1","是");
-        data.put("2","否");
-        return data;
+    public String ajaxCheckBox() {
+        return "sfasfasfasdfasdfasdf";
     }
 
 }

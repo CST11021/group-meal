@@ -68,8 +68,21 @@
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">测试</label>
+        <div id="test" class="layui-input-block">
+
+        </div>
+    </div>
+    <button class="layui-btn" style="cursor: pointer;">123</button>
+
 </form>
 
+
+
+
+<script src="/static/layui/layui.all.js"></script>
 <script>
     //Demo
     layui.use('form', function(){
@@ -84,9 +97,46 @@
 </script>
 
 
-<script src="/static/layui/layui.all.js"></script>
-<script>
+<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/babel">
+    var UserGist = React.createClass({
+        getInitialState: function() {
+            return {
+                data: ''
+            };
+        },
 
+        componentDidMount: function() {
+            this.serverRequest = $.get(this.props.source, function (result) {
+                this.setState({
+                    data: result
+                });
+            }.bind(this));
+        },
+
+        componentWillUnmount: function() {
+            this.serverRequest.abort();
+        },
+
+        render: function() {
+            return <button style="cursor: pointer">{this.state.data}</button>;
+
+        }
+    });
+
+    ReactDOM.render(
+            <UserGist source="/layui/ajaxCheckBox" />,
+            document.getElementById('test')
+    );
 </script>
+
+
+
+
+
+
 </body>
 </html>
