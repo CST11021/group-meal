@@ -8,24 +8,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @authod wb-whz291815
  * @create 2017/9/21 14:11
  */
-@Controller("company")
+@Controller
+@RequestMapping("/company")
 public class CompanyController {
 
     private Logger logger = LoggerFactory.getLogger(CompanyController.class);
 
     @RequestMapping("/query")
-    @ResponseBody
-    public BaseResult query(CompanyQueryVO queryVO) {
+    public ModelAndView query(CompanyQueryVO queryVO) {
 
-
-
-
-        return BaseResult.makeSuccess();
+        return new ModelAndView("/company/companyManager");
     }
 
 }
