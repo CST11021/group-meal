@@ -16,11 +16,13 @@ import java.util.List;
 public class CompanyServiceImpl implements CompanyService {
     @Override
     public PageResult<List<GroupCompanyDO>> queryPageByCondition(BaseQueryDO<GroupCompanyDO> condition) {
+
         return null;
     }
 
     @Override
     public boolean save(GroupCompanyDO groupCompanyDO) {
+
         return false;
     }
 

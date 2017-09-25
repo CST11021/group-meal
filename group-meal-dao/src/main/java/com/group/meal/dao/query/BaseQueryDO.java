@@ -15,17 +15,38 @@ public class BaseQueryDO<T> {
     /**
      * 当前页
      */
-    private int currentPage;
+    private Integer currentPage;
 
     /**
      * 每页显示个数
      */
-    private int pageSize;
+    private Integer pageSize;
+
+    /**
+     * 排序字段信息，比如：id asc, value desc
+     */
+    private String orderBy;
+
+    public BaseQueryDO(T queryParam) {
+        this.queryParam = queryParam;
+    }
+
+    public BaseQueryDO(T queryParam, String orderBy) {
+        this.queryParam = queryParam;
+        this.orderBy = orderBy;
+    }
 
     public BaseQueryDO(T queryParam, int currentPage, int pageSize) {
         this.queryParam = queryParam;
         this.currentPage = currentPage;
         this.pageSize = pageSize;
+    }
+
+    public BaseQueryDO(T queryParam, Integer currentPage, Integer pageSize, String orderBy) {
+        this.queryParam = queryParam;
+        this.currentPage = currentPage;
+        this.pageSize = pageSize;
+        this.orderBy = orderBy;
     }
 
     /**
@@ -45,20 +66,27 @@ public class BaseQueryDO<T> {
         this.queryParam = queryParam;
     }
 
-    public int getCurrentPage() {
+    public Integer getCurrentPage() {
         return currentPage;
     }
 
-    public void setCurrentPage(int currentPage) {
+    public void setCurrentPage(Integer currentPage) {
         this.currentPage = currentPage;
     }
 
-    public int getPageSize() {
+    public Integer getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(int pageSize) {
+    public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
 
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
 }

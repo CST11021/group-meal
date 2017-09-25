@@ -29,112 +29,78 @@
         from group_company
         where id = #{id,jdbcType=BIGINT}
     </select>
+    <select id="selectByCondition" resultMap="BaseResultMap">
+        select *
+        from group_company
+        <where>
+            <if test="queryParam.id != null">
+                id = #{queryParam.id,jdbcType=BIGINT}
+            </if>
+            <if test="queryParam.gmtCreate != null">
+                gmt_create = #{queryParam.gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="queryParam.gmtModified != null">
+                gmt_modified = #{queryParam.gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="queryParam.status != null">
+                status = #{queryParam.status,jdbcType=TINYINT},
+            </if>
+            <if test="queryParam.fullName != null">
+                full_name = #{queryParam.fullName,jdbcType=VARCHAR},
+            </if>
+            <if test="queryParam.shortName != null">
+                short_name = #{queryParam.shortName,jdbcType=VARCHAR},
+            </if>
+            <if test="queryParam.ownerCity != null">
+                owner_city = #{ownerCity,jdbcType=VARCHAR},
+            </if>
+            <if test="queryParam.area != null">
+                area = #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="queryParam.address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="queryParam.contactPerson != null">
+                contact_person = #{contactPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="queryParam.contactPhone != null">
+                contact_phone = #{contactPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="queryParam.cooperationStartTime != null">
+                cooperation_start_time = #{cooperationStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="queryParam.cooperationEndTime != null">
+                cooperation_end_time = #{cooperationEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="queryParam.isDel != null">
+                is_del = #{isDel,jdbcType=TINYINT},
+            </if>
+        </where>
+        <if test="orderBy != null">
+            order by #{orderBy}
+        </if>
+        <if test="currentPage != null and pageSize != null">
+            limit #{startRow}, #{pageSize}
+        </if>
+
+    </select>
+    <select id="countByCondition" resultType="java.lang.Long"></select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from group_company
     where id = #{id,jdbcType=BIGINT}
   </delete>
     <insert id="insert" parameterType="com.group.meal.dao.dataobject.GroupCompanyDO">
-    insert into group_company (id, gmt_create, gmt_modified, 
-      status, full_name, short_name, 
+      insert into group_company (
+      gmt_create, gmt_modified,
+      full_name, short_name,
       owner_city, area, address, 
-      contact_person, contact_phone, cooperation_start_time, 
-      cooperation_end_time, is_del)
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=TINYINT}, #{fullName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, 
+      contact_person, contact_phone,
+      cooperation_start_time, cooperation_end_time)
+      values (NOW(), NOW(),
+      #{fullName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR},
       #{ownerCity,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{contactPerson,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, #{cooperationStartTime,jdbcType=TIMESTAMP}, 
-      #{cooperationEndTime,jdbcType=TIMESTAMP}, #{isDel,jdbcType=TINYINT})
-  </insert>
-    <insert id="insertSelective" parameterType="com.group.meal.dao.dataobject.GroupCompanyDO">
-        insert into group_company
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="gmtCreate != null">
-                gmt_create,
-            </if>
-            <if test="gmtModified != null">
-                gmt_modified,
-            </if>
-            <if test="status != null">
-                status,
-            </if>
-            <if test="fullName != null">
-                full_name,
-            </if>
-            <if test="shortName != null">
-                short_name,
-            </if>
-            <if test="ownerCity != null">
-                owner_city,
-            </if>
-            <if test="area != null">
-                area,
-            </if>
-            <if test="address != null">
-                address,
-            </if>
-            <if test="contactPerson != null">
-                contact_person,
-            </if>
-            <if test="contactPhone != null">
-                contact_phone,
-            </if>
-            <if test="cooperationStartTime != null">
-                cooperation_start_time,
-            </if>
-            <if test="cooperationEndTime != null">
-                cooperation_end_time,
-            </if>
-            <if test="isDel != null">
-                is_del,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=BIGINT},
-            </if>
-            <if test="gmtCreate != null">
-                #{gmtCreate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="gmtModified != null">
-                #{gmtModified,jdbcType=TIMESTAMP},
-            </if>
-            <if test="status != null">
-                #{status,jdbcType=TINYINT},
-            </if>
-            <if test="fullName != null">
-                #{fullName,jdbcType=VARCHAR},
-            </if>
-            <if test="shortName != null">
-                #{shortName,jdbcType=VARCHAR},
-            </if>
-            <if test="ownerCity != null">
-                #{ownerCity,jdbcType=VARCHAR},
-            </if>
-            <if test="area != null">
-                #{area,jdbcType=VARCHAR},
-            </if>
-            <if test="address != null">
-                #{address,jdbcType=VARCHAR},
-            </if>
-            <if test="contactPerson != null">
-                #{contactPerson,jdbcType=VARCHAR},
-            </if>
-            <if test="contactPhone != null">
-                #{contactPhone,jdbcType=VARCHAR},
-            </if>
-            <if test="cooperationStartTime != null">
-                #{cooperationStartTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="cooperationEndTime != null">
-                #{cooperationEndTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="isDel != null">
-                #{isDel,jdbcType=TINYINT},
-            </if>
-        </trim>
+      #{contactPerson,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR},
+      #{cooperationStartTime,jdbcType=TIMESTAMP}, #{cooperationEndTime,jdbcType=TIMESTAMP})
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.group.meal.dao.dataobject.GroupCompanyDO">
         update group_company

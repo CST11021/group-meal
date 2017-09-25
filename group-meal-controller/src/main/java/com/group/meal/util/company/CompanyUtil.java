@@ -1,10 +1,14 @@
 package com.group.meal.util.company;
 
+import com.google.common.collect.Lists;
 import com.group.meal.dao.dataobject.GroupCompanyDO;
 import com.group.meal.utils.date.DateUtil;
+import com.group.meal.vo.company.CompanyResultVO;
 import com.group.meal.vo.company.CompanySaveVO;
+import org.apache.commons.collections.CollectionUtils;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @authod wb-whz291815
@@ -24,6 +28,20 @@ public class CompanyUtil {
         companyDO.setCooperationStartTime(DateUtil.parse(saveVO.getCooperationStartTime(), DateUtil.DEFAULT_PATTERN));
         companyDO.setCooperationEndTime(DateUtil.parse(saveVO.getCooperationEndTime(), DateUtil.DEFAULT_PATTERN));
         return companyDO;
+    }
+
+    public static List<CompanyResultVO> convert(List<GroupCompanyDO> companyDOList) {
+        List<CompanyResultVO> resultVOList = Lists.newArrayList();
+        if (CollectionUtils.isEmpty(companyDOList)) {
+            return resultVOList;
+        }
+
+        companyDOList.stream().forEach(groupCompanyDO -> {
+            CompanyResultVO companyResultVO = new CompanyResultVO();
+
+        });
+
+        return resultVOList;
     }
 
 }

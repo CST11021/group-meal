@@ -6,10 +6,28 @@ package com.group.meal.vo.company;
  */
 public class CompanyQueryVO {
 
+    private Integer currentPage;
+    private Integer pageSize;
     private String fullName;
     private Integer status;
     private String ownerCity;
     private String area;
+
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
 
     public String getFullName() {
         return fullName;
@@ -46,7 +64,9 @@ public class CompanyQueryVO {
     @Override
     public String toString() {
         return "CompanyQueryVO{" +
-                "fullName='" + fullName + '\'' +
+                "currentPage=" + currentPage +
+                ", pageSize=" + pageSize +
+                ", fullName='" + fullName + '\'' +
                 ", status=" + status +
                 ", ownerCity='" + ownerCity + '\'' +
                 ", area='" + area + '\'' +
