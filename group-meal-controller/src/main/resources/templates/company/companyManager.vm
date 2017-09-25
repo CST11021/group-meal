@@ -105,7 +105,17 @@
     var UserGist = React.createClass({
         getInitialState: function() {
             return {
-                data: ''
+                data: '',
+                classValue:'layui-btn',
+                user:{
+                    name:'张三',
+                    age:18
+                },
+                bookList:[
+                    {name:"书1", author:"张三"}
+                    ,{name:"书2", author:"李四"}
+                    ,{name:"书3", author:"王五"}
+                ]
             };
         },
 
@@ -122,16 +132,47 @@
         },
 
         render: function() {
+
+            var strArray = [
+                <button>春季</button>,
+                <button>夏季</button>,
+                <button>秋季</button>,
+                <button>冬季</button>
+            ];
+
+            var myStyle = {
+                fontSize: 10,
+                color: '#FF0000'
+            };
+
             return (
                 <div>
                     <button title="123" style={{width:300,height:20,cursor: "pointer"}}>{this.state.data}</button>
-                    <button class="layui-btn">{this.state.data}</button>
+                    <button className={this.state.classValue}>{this.state.classValue}</button>
+                    <h1>姓名：{this.state.user.name}，年龄：{this.state.user.age}</h1>
+                    <ol>
+                        {
+                            strArray.map(function(item){
+                                return <li>{item}</li>
+                            })
+                        }
+                    </ol>
+
+                    <h1 style = {myStyle}>菜鸟教程</h1>
+
+                    {
+                        this.state.bookList.map(function(book,index){
+                            return <li style={{"color":"red"}}>序号：{index} 书名：{book.name} 作者：{book.author}</li>
+                        })
+                    }
+
+
+
                 </div>
             );
 
         }
     });
-
     ReactDOM.render(
             <UserGist source="/layui/ajaxCheckBox" />,
             document.getElementById('test')
