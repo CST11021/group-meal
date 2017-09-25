@@ -1,10 +1,11 @@
-package com.group.meal.dao.dataobject.query;
+package com.group.meal.dao.query;
 
 /**
  * 封装分页信息
+ *
  * @param <T>
  */
-public class QueryPageDO<T> {
+public class BaseQueryDO<T> {
 
     /**
      * 查询参数Object
@@ -21,7 +22,7 @@ public class QueryPageDO<T> {
      */
     private int pageSize;
 
-    public QueryPageDO(T queryParam, int currentPage, int pageSize) {
+    public BaseQueryDO(T queryParam, int currentPage, int pageSize) {
         this.queryParam = queryParam;
         this.currentPage = currentPage;
         this.pageSize = pageSize;
@@ -29,6 +30,7 @@ public class QueryPageDO<T> {
 
     /**
      * 计算开始行索引
+     *
      * @return
      */
     public int getStartRow() {

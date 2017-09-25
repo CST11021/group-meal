@@ -1,4 +1,4 @@
-package com.group.meal.service.utils;
+package com.group.meal.service.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

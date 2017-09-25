@@ -1,4 +1,4 @@
-package com.group.meal.service.utils;
+package com.group.meal.service.util;
 
 /**
  * 生成唯一的uniqid的工具类
