@@ -1,6 +1,7 @@
 package com.group.meal.controller.company;
 
 import com.group.meal.dao.dataobject.GroupCompanyDO;
+import com.group.meal.dao.query.BaseQueryDO;
 import com.group.meal.result.BaseResult;
 import com.group.meal.result.PageResult;
 import com.group.meal.service.local.company.CompanyService;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /**
  * @authod wb-whz291815
@@ -39,21 +42,18 @@ public class CompanyController {
 
     @ResponseBody
     @RequestMapping("/query")
-    public PageResult<CompanyResultVO> query(CompanyQueryVO queryVO) {
-
-
-//        companyService.queryPageByCondition();
-
-        return null;
+    public PageResult<List<CompanyResultVO>> query(CompanyQueryVO queryVO) {
+        BaseQueryDO<GroupCompanyDO> baseQueryDO = CompanyUtil.convert(queryVO);
+        PageResult<List<GroupCompanyDO>> pageResult = companyService.queryPageByCondition(baseQueryDO);
+        return CompanyUtil.convert(pageResult);
     }
 
     @ResponseBody
     @RequestMapping("/save")
     public BaseResult save(@RequestParam CompanySaveVO saveVO) {
-
         GroupCompanyDO companyDO = CompanyUtil.convert(saveVO);
-
-        return null;
+        boolean success = companyService.save(companyDO);
+        return success ? BaseResult.makeSuccess() : BaseResult.makeFail();
     }
 
     @ResponseBody

@@ -9,7 +9,7 @@ public class CompanyQueryVO {
     private Integer currentPage;
     private Integer pageSize;
     private String fullName;
-    private Integer status;
+    private Byte status;
     private String ownerCity;
     private String area;
 
@@ -37,11 +37,11 @@ public class CompanyQueryVO {
         this.fullName = fullName;
     }
 
-    public Integer getStatus() {
+    public Byte getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Byte status) {
         this.status = status;
     }
 

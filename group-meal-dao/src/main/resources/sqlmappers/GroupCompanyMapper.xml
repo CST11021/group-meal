@@ -84,7 +84,54 @@
         </if>
 
     </select>
-    <select id="countByCondition" resultType="java.lang.Long"></select>
+    <select id="countByCondition" resultType="java.lang.Long">
+        select count(*)
+        from group_company
+        <where>
+            <if test="queryParam.id != null">
+                id = #{queryParam.id,jdbcType=BIGINT}
+            </if>
+            <if test="queryParam.gmtCreate != null">
+                gmt_create = #{queryParam.gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="queryParam.gmtModified != null">
+                gmt_modified = #{queryParam.gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="queryParam.status != null">
+                status = #{queryParam.status,jdbcType=TINYINT},
+            </if>
+            <if test="queryParam.fullName != null">
+                full_name = #{queryParam.fullName,jdbcType=VARCHAR},
+            </if>
+            <if test="queryParam.shortName != null">
+                short_name = #{queryParam.shortName,jdbcType=VARCHAR},
+            </if>
+            <if test="queryParam.ownerCity != null">
+                owner_city = #{ownerCity,jdbcType=VARCHAR},
+            </if>
+            <if test="queryParam.area != null">
+                area = #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="queryParam.address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="queryParam.contactPerson != null">
+                contact_person = #{contactPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="queryParam.contactPhone != null">
+                contact_phone = #{contactPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="queryParam.cooperationStartTime != null">
+                cooperation_start_time = #{cooperationStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="queryParam.cooperationEndTime != null">
+                cooperation_end_time = #{cooperationEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="queryParam.isDel != null">
+                is_del = #{isDel,jdbcType=TINYINT},
+            </if>
+        </where>
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from group_company
     where id = #{id,jdbcType=BIGINT}

@@ -11,17 +11,17 @@ public class BaseResult<T> implements Serializable {
     /**
      * 返回结果
      */
-    private T result;
+    private T data;
 
     /**
      * 错误信息
      */
-    private String errorMsg;
+    private String msg;
 
     /**
      * 错误代码
      */
-    private String errorCode;
+    private String code;
 
     /**
      * 是否成功
@@ -32,10 +32,10 @@ public class BaseResult<T> implements Serializable {
         this.success = true;
     }
 
-    public BaseResult(String errorCode, String errorMsg) {
+    public BaseResult(String code, String msg) {
         this.success = false;
-        this.errorCode = errorCode;
-        this.errorMsg = errorMsg;
+        this.code = code;
+        this.msg = msg;
     }
 
     public static BaseResult<Void> makeSuccess() {
@@ -59,28 +59,28 @@ public class BaseResult<T> implements Serializable {
         return result;
     }
 
-    public T getResult() {
-        return result;
+    public T getData() {
+        return data;
     }
 
-    public void setResult(T result) {
-        this.result = result;
+    public void setData(T data) {
+        this.data = data;
     }
 
-    public String getErrorMsg() {
-        return errorMsg;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setErrorMsg(String errorMsg) {
-        this.errorMsg = errorMsg;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
-    public String getErrorCode() {
-        return errorCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public boolean isSuccess() {

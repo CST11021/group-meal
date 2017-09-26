@@ -2,21 +2,28 @@ package com.group.meal.util.company;
 
 import com.google.common.collect.Lists;
 import com.group.meal.dao.dataobject.GroupCompanyDO;
+import com.group.meal.dao.query.BaseQueryDO;
+import com.group.meal.result.PageResult;
+import com.group.meal.util.base.BaseUtil;
 import com.group.meal.utils.date.DateUtil;
+import com.group.meal.vo.company.CompanyQueryVO;
 import com.group.meal.vo.company.CompanyResultVO;
 import com.group.meal.vo.company.CompanySaveVO;
 import org.apache.commons.collections.CollectionUtils;
 
-import java.util.Date;
 import java.util.List;
 
 /**
  * @authod wb-whz291815
  * @create 2017/9/25 14:40
  */
-public class CompanyUtil {
+public class CompanyUtil{
 
     public static GroupCompanyDO convert(CompanySaveVO saveVO) {
+        if (saveVO == null) {
+            return null;
+        }
+
         GroupCompanyDO companyDO = new GroupCompanyDO();
         companyDO.setFullName(saveVO.getFullName());
         companyDO.setShortName(saveVO.getShortName());
@@ -37,11 +44,48 @@ public class CompanyUtil {
         }
 
         companyDOList.stream().forEach(groupCompanyDO -> {
-            CompanyResultVO companyResultVO = new CompanyResultVO();
 
+            CompanyResultVO companyResultVO = new CompanyResultVO();
+            companyResultVO.setId(groupCompanyDO.getId());
+            companyResultVO.setGmtCreate(DateUtil.format(groupCompanyDO.getGmtCreate(), DateUtil.DEFAULT_PATTERN));
+            companyResultVO.setGmtModified(DateUtil.format(groupCompanyDO.getGmtModified(), DateUtil.DEFAULT_PATTERN));
+            companyResultVO.setFullName(groupCompanyDO.getFullName());
+            companyResultVO.setShortName(groupCompanyDO.getShortName());
+            companyResultVO.setOwnerCity(groupCompanyDO.getOwnerCity());
+            companyResultVO.setArea(groupCompanyDO.getArea());
+            companyResultVO.setAddress(groupCompanyDO.getAddress());
+            companyResultVO.setContactPerson(groupCompanyDO.getContactPerson());
+            companyResultVO.setContactPhone(groupCompanyDO.getContactPhone());
+            companyResultVO.setCooperationStartTime(DateUtil.format(groupCompanyDO.getCooperationStartTime(), DateUtil.DEFAULT_PATTERN));
+            companyResultVO.setCooperationEndTime(DateUtil.format(groupCompanyDO.getCooperationEndTime(), DateUtil.DEFAULT_PATTERN));
+            companyResultVO.setIsDel(groupCompanyDO.getIsDel());
+            resultVOList.add(companyResultVO);
         });
 
         return resultVOList;
     }
+
+    public static BaseQueryDO<GroupCompanyDO> convert(CompanyQueryVO companyQueryVO) {
+        if (companyQueryVO == null) {
+            return null;
+        }
+        GroupCompanyDO groupCompanyDO = new GroupCompanyDO();
+        groupCompanyDO.setArea(companyQueryVO.getArea());
+        groupCompanyDO.setFullName(companyQueryVO.getFullName());
+        groupCompanyDO.setOwnerCity(companyQueryVO.getOwnerCity());
+        groupCompanyDO.setStatus(companyQueryVO.getStatus());
+
+        BaseQueryDO<GroupCompanyDO> baseQueryDO = new BaseQueryDO(
+                groupCompanyDO, companyQueryVO.getCurrentPage(), companyQueryVO.getPageSize());
+
+        return baseQueryDO;
+    }
+
+    public static PageResult<List<CompanyResultVO>> convert(PageResult<List<GroupCompanyDO>> pageResult) {
+        PageResult<List<CompanyResultVO>> result = BaseUtil.clone(pageResult);
+        result.setData(convert(pageResult.getData()));
+        return result;
+    }
+
 
 }
