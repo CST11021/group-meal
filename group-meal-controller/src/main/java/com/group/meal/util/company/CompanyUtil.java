@@ -49,6 +49,7 @@ public class CompanyUtil{
             companyResultVO.setId(groupCompanyDO.getId());
             companyResultVO.setGmtCreate(DateUtil.format(groupCompanyDO.getGmtCreate(), DateUtil.DEFAULT_PATTERN));
             companyResultVO.setGmtModified(DateUtil.format(groupCompanyDO.getGmtModified(), DateUtil.DEFAULT_PATTERN));
+            companyResultVO.setStatus(groupCompanyDO.getStatus());
             companyResultVO.setFullName(groupCompanyDO.getFullName());
             companyResultVO.setShortName(groupCompanyDO.getShortName());
             companyResultVO.setOwnerCity(groupCompanyDO.getOwnerCity());
