@@ -2,8 +2,10 @@ package com.group.meal.controller.company;
 
 import com.group.meal.dao.dataobject.GroupCompanyDO;
 import com.group.meal.dao.query.BaseQueryDO;
+import com.group.meal.enums.MealResultCodeEnum;
 import com.group.meal.result.BaseResult;
 import com.group.meal.result.PageResult;
+import com.group.meal.result.http.HttpResponsePageResult;
 import com.group.meal.service.local.company.CompanyService;
 import com.group.meal.util.company.CompanyUtil;
 import com.group.meal.vo.company.CompanyQueryVO;
@@ -42,7 +44,7 @@ public class CompanyController {
 
     @ResponseBody
     @RequestMapping("/query")
-    public PageResult<List<CompanyResultVO>> query(CompanyQueryVO queryVO) {
+    public HttpResponsePageResult<List<CompanyResultVO>> query(CompanyQueryVO queryVO) {
         BaseQueryDO<GroupCompanyDO> baseQueryDO = CompanyUtil.convert(queryVO);
         PageResult<List<GroupCompanyDO>> pageResult = companyService.queryPageByCondition(baseQueryDO);
         return CompanyUtil.convert(pageResult);
@@ -53,7 +55,7 @@ public class CompanyController {
     public BaseResult save(@RequestParam CompanySaveVO saveVO) {
         GroupCompanyDO companyDO = CompanyUtil.convert(saveVO);
         boolean success = companyService.save(companyDO);
-        return success ? BaseResult.makeSuccess() : BaseResult.makeFail();
+        return success ? BaseResult.makeSuccess() : BaseResult.makeFail(MealResultCodeEnum.MEAL_SYSTEM_ERROR);
     }
 
     @ResponseBody

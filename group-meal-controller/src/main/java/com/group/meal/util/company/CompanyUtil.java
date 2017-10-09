@@ -4,12 +4,15 @@ import com.google.common.collect.Lists;
 import com.group.meal.dao.dataobject.GroupCompanyDO;
 import com.group.meal.dao.query.BaseQueryDO;
 import com.group.meal.result.PageResult;
+import com.group.meal.result.http.HttpResponsePageResult;
+import com.group.meal.result.http.HttpResponseResult;
 import com.group.meal.util.base.BaseUtil;
 import com.group.meal.utils.date.DateUtil;
 import com.group.meal.vo.company.CompanyQueryVO;
 import com.group.meal.vo.company.CompanyResultVO;
 import com.group.meal.vo.company.CompanySaveVO;
 import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.BeanUtils;
 
 import java.util.List;
 
@@ -82,10 +85,10 @@ public class CompanyUtil{
         return baseQueryDO;
     }
 
-    public static PageResult<List<CompanyResultVO>> convert(PageResult<List<GroupCompanyDO>> pageResult) {
-        PageResult<List<CompanyResultVO>> result = BaseUtil.clone(pageResult);
-        result.setData(convert(pageResult.getData()));
-        return result;
+    public static HttpResponsePageResult<List<CompanyResultVO>> convert(PageResult<List<GroupCompanyDO>> pageResult) {
+        HttpResponsePageResult<List<CompanyResultVO>> httpResponseResult = new HttpResponsePageResult();
+        BeanUtils.copyProperties(pageResult, httpResponseResult);
+        return httpResponseResult;
     }
 
 

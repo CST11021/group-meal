@@ -1,11 +1,9 @@
 package com.group.meal.result;
 
+import com.group.meal.enums.MealResultCodeEnum;
+
 import java.io.Serializable;
 
-/**
- * @author baosxie
- * @version $Id: BaseResult.java, v 0.1 2017-08-31 17:20 baosxie Exp $$
- */
 public class BaseResult<T> implements Serializable {
 
     /**
@@ -32,10 +30,10 @@ public class BaseResult<T> implements Serializable {
         this.success = true;
     }
 
-    public BaseResult(String code, String msg) {
+    public BaseResult(MealResultCodeEnum codeEnum) {
         this.success = false;
-        this.code = code;
-        this.msg = msg;
+        this.code = codeEnum.getErrorCode();
+        this.msg = codeEnum.getErrorMsg();
     }
 
     public static BaseResult<Void> makeSuccess() {
@@ -44,18 +42,19 @@ public class BaseResult<T> implements Serializable {
     }
 
     public static <T> BaseResult<T> makeSuccess(T data){
-        BaseResult<T> result = new BaseResult<>();
+        BaseResult<T> result = new BaseResult();
+        result.setData(data);
         return result;
     }
 
-    public static BaseResult<Void> makeFail() {
-        BaseResult<Void> result = new BaseResult();
-        result.setSuccess(false);
+    public static <T> BaseResult<T> makeFail(MealResultCodeEnum codeEnum){
+        BaseResult<T> result = new BaseResult(codeEnum);
         return result;
     }
 
-    public static <T> BaseResult<T> makeFail(String errorCode, String  errorMsg){
-        BaseResult<T> result = new BaseResult<>(errorCode, errorMsg);
+    public static <T> BaseResult<T> makeFail(T data, MealResultCodeEnum codeEnum){
+        BaseResult<T> result = BaseResult.makeFail(codeEnum);
+        result.setData(data);
         return result;
     }
 

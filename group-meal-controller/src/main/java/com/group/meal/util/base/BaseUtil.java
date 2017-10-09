@@ -10,11 +10,11 @@ import com.group.meal.result.PageResult;
 public class BaseUtil {
 
     /**
-     * 复制一个BaseResult对象（result属性不复制）
+     * 复制一个BaseResult对象（data属性不复制）
      * @param baseResult
      * @return
      */
-    public static BaseResult clone(BaseResult baseResult) {
+    public static BaseResult cloneWithoutData(BaseResult baseResult) {
         PageResult result = new PageResult();
         result.setSuccess(baseResult.isSuccess());
         result.setCode(baseResult.getCode());
@@ -23,11 +23,11 @@ public class BaseUtil {
     }
 
     /**
-     * 复制一个PageResult对象（result属性不复制）
+     * 复制一个PageResult对象（data属性不复制）
      * @param pageResult
      * @return
      */
-    public static PageResult clone(PageResult pageResult) {
+    public static PageResult cloneWithoutData(PageResult pageResult) {
         PageResult result = new PageResult();
         result.setCount(pageResult.getCount());
         result.setSuccess(pageResult.isSuccess());
