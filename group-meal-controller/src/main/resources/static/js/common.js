@@ -12,12 +12,13 @@ var response = {
     ,dataName: 'data' //数据列表的字段名称，默认：data
 };
 
-function renderTable(elem, url, cols) {
+function renderTable(elem, url, cols, param) {
     var table = layui.table;
     var setting = {
         elem: elem //指定原始表格元素选择器（推荐id选择器）
-        ,height: 315 //容器高度
         ,url: url
+        ,where: param //设定异步数据接口的额外参数，任意设
+        ,method: 'post'
         ,request: request
         ,response: response
         ,cols: cols
@@ -26,4 +27,5 @@ function renderTable(elem, url, cols) {
         ,loading: true
     };
     table.render(setting);
+    return table;
 }

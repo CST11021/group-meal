@@ -32,4 +32,9 @@ public class ApplicationTests {
 
 	}
 
+	@Test
+	public void test() {
+		if(true) throw new RuntimeException("just a test");
+	}
+
 }

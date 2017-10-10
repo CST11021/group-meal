@@ -87,7 +87,10 @@ public class CompanyUtil{
 
     public static HttpResponsePageResult<List<CompanyResultVO>> convert(PageResult<List<GroupCompanyDO>> pageResult) {
         HttpResponsePageResult<List<CompanyResultVO>> httpResponseResult = new HttpResponsePageResult();
-        BeanUtils.copyProperties(pageResult, httpResponseResult);
+        BeanUtils.copyProperties(pageResult, httpResponseResult, new String[]{"data"});
+        if (pageResult.getData() != null) {
+            httpResponseResult.setData(CompanyUtil.convert(pageResult.getData()));
+        }
         return httpResponseResult;
     }
 

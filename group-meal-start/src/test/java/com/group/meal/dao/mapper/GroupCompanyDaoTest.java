@@ -51,6 +51,7 @@ public class GroupCompanyDaoTest extends ApplicationTests{
     @Test
     public void selectByConditionTest() {
         GroupCompanyDO companyDO = new GroupCompanyDO();
+        companyDO.setArea("area");
         BaseQueryDO<GroupCompanyDO> baseQueryDO = new BaseQueryDO(companyDO);
         List<GroupCompanyDO> companyDOs = groupCompanyDao.selectByCondition(baseQueryDO);
         System.out.println(companyDOs);

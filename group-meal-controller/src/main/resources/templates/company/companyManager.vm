@@ -1,79 +1,224 @@
-<form class="layui-form" action="/company/query">
 
-    <div class="layui-row">
-        <div class="layui-col-md3">
-            <div class="layui-form-item">
-                <label class="layui-form-label">公司名称</label>
-                <div class="layui-input-block">
-                    <input type="text" name="title" required  lay-verify="required"
-                           placeholder="请输入公司全称，支持模糊查询" autocomplete="off" class="layui-input">
-                </div>
+<div class="layui-row">
+    <div class="layui-col-md3">
+        <div class="layui-form-item">
+            <label class="layui-form-label">公司名称</label>
+            <div class="layui-input-block">
+                <input type="text" id="id_companyName" name="companyName" placeholder="请输入公司全称，支持模糊查询" autocomplete="off" class="layui-input">
             </div>
         </div>
-
-        <div class="layui-col-md3">
-
-            <div class="layui-form-item">
-                <label class="layui-form-label">是否停用</label>
-                <div class="layui-input-block">
-                    <input type="checkbox" name="status" title="">
-                </div>
-            </div>
-
-        </div>
-
-
     </div>
-
-    <div class="layui-row">
-
-        <div class="layui-col-md3">
-            <div class="layui-form-item">
-                <label class="layui-form-label">所属城市</label>
-                <div class="layui-input-block">
-                    <input type="text" name="title" required  lay-verify="required"
-                           placeholder="请输入公司所属城市" autocomplete="off" class="layui-input">
-                </div>
+    <div class="layui-col-md3">
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否停用</label>
+            <div class="layui-input-block">
+                <input type="checkbox" id="id_status" name="status" title="">
             </div>
         </div>
-        <div class="layui-col-md3">
-            <div class="layui-form-item">
-                <label class="layui-form-label">所属地区</label>
-                <div class="layui-input-block">
-                    <input type="text" name="title" required  lay-verify="required"
-                           placeholder="请输入公司所属地区" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-        </div>
-
-        <div class="layui-col-md3">
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
-                ##                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                </div>
-            </div>
-        </div>
-
     </div>
+</div>
+<div class="layui-row">
+    <div class="layui-col-md3">
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属城市</label>
+            <div class="layui-input-block">
+                <input type="text" id="id_ownerCity" name="ownerCity"
+                       placeholder="请输入公司所属城市" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md3">
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属地区</label>
+            <div class="layui-input-block">
+                <input type="text" id="id_area" name="area" placeholder="请输入公司所属地区" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md3">
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button id="btn_id_queryCompany" class="layui-btn" lay-submit lay-filter="formDemo"
+                        data-type="reload">查询</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="layui-row">
+    <div class="label-col-md2">
+        <button id="btn_id_addCompany" class="layui-btn" lay-filter="addCompany">新增</button>
+    </div>
+</div>
+<table id="companys_table" lay-filter="lf_companys_table"></table>
 
+<form id="form_id_saveCompany" class="layui-form" action="/company/save" style="display: none;">
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">公司全称</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">公司简称</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">所属城市</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">区域</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">配送地址</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">联系人</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">联系电话</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">开始合作时间</label>
+        <div class="layui-input-inline">
+            <input id="input_id_startTime" type="text" class="layui-input" placeholder="" style="width: 300px;">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">截止合作时间</label>
+        <div class="layui-input-inline">
+            <input id="input_id_endTime" type="text" class="layui-input" placeholder="" style="width: 300px;">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
 </form>
-<table id="companys_table"></table>
+
+
 
 <script src="/static/layui/layui.all.js"></script>
-<script src="/static/js/common.js"></script>
+##<script src="/static/js/common.js"></script>
 <script type="text/html" id="oparatorBar">
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
     <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
 </script>
 <script>
-    var elem = '#companys_table';
-    var url = '/company/query';
+    var table = layui.table;
     var cols = [[
-        {field: 'id', title: 'ID'}
+        {checkbox: true, fixed: true}
+        ,{field: 'id', title: 'ID', width:50, fixed: 'left'}
+        ,{field: 'gmtCreate', title: '创建时间', width:180}
+        ,{field: 'gmtModified', title: '修改时间', width:180}
+        ,{field: 'status', title: '状态', width:100}
+        ,{field: 'fullName', title: '公司全名', width:100}
+        ,{field: 'shortName', title: '公司简称', width:100}
+        ,{field: 'ownerCity', title: '所属城市', width:100}
+        ,{field: 'area', title: '所属区域', width:100}
+        ,{field: 'address', title: '详细地址', width:100}
+        ,{field: 'contactPerson', title: '联系人', width:100}
+        ,{field: 'contactPhone', title: '联系电话', width:100}
+        ,{field: 'cooperationStartTime', title: '开始合作时间', width:180}
+        ,{field: 'cooperationEndTime', title: '结束合作时间', width:180}
+        ,{fixed: 'right', width:160, align:'center', toolbar: '#oparatorBar'}
     ]];
-    renderTable(elem, url, cols);
+    var request = {
+        pageName: 'currentPage' //页码的参数名称，默认：page
+        ,limitName: 'pageSize' //每页数据量的参数名，默认：limit
+    };
+    var response = {
+        statusName: 'httpStatus' //数据状态的字段名称，默认：code
+        ,statusCode: 200 //成功的状态码，默认：0
+        ,msgName: 'msg' //状态信息的字段名称，默认：msg
+        ,countName: 'count' //数据总数的字段名称，默认：count
+        ,dataName: 'data' //数据列表的字段名称，默认：data
+    };
+    table.render({
+        id:'companyReload'
+        ,elem: '#companys_table' //指定原始表格元素选择器（推荐id选择器）
+        ,url: '/company/query'
+        ,method: 'post'
+        ,request: request
+        ,response: response
+        ,cols: cols
+        ,page: true
+        ,limit: 10
+        ,loading: true
+    });
+
+    var laydate = layui.laydate;
+    laydate.render({
+        elem: '#input_id_startTime'
+        ,type: 'datetime'
+    });
+    laydate.render({
+        elem: '#input_id_endTime'
+        ,type: 'datetime'
+    });
+
+    // 查询绑定
+    $('#btn_id_queryCompany').on('click', function(){
+        table.reload('companyReload', {
+            where: {
+                area: $("#id_area").val()
+            }
+        });
+    });
+
+    // 新增绑定
+    $('#btn_id_addCompany').on('click', function(){
+        var _html = document.getElementById('form_id_saveCompany').innerHTML;
+        layer.open({
+            type: 1
+            ,content: $('#form_id_saveCompany')
+            ,area: ['500px', '620px']
+            ,end: function(){
+                $('#form_id_saveCompany').css("display","none");
+            }
+        });
+    });
+
+    // 监听表格复选框选择
+    table.on('checkbox(lf_companys_table)', function(obj){
+        console.log(obj.checked); //当前是否选中状态
+        console.log(obj.data); //选中行的相关数据
+        console.log(obj.type); //如果触发的是全选，则为：all，如果触发的是单选，则为：one
+    });
+
+    // 监听查看、编辑和删除
+    table.on('tool(lf_companys_table)', function(obj){
+        var data = obj.data;
+        if(obj.event === 'detail'){
+            layer.msg('ID：'+ data.id + ' 的查看操作');
+        } else if(obj.event === 'del'){
+            layer.confirm('真的删除行么', function(index){
+                obj.del();
+                layer.close(index);
+            });
+        } else if(obj.event === 'edit'){
+            layer.alert('编辑行：<br>'+ JSON.stringify(data));
+        }
+    });
 </script>
 <script type="text/babel"></script>
 
