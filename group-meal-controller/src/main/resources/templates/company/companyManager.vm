@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>公司管理</title>
-    <link rel="stylesheet" href="/static/layui/css/layui.css">
-</head>
-<body>
+#set($layout = "/layout/default.vm")
 
 <form class="layui-form" action="/company/query">
 
@@ -20,23 +12,17 @@
                 </div>
             </div>
         </div>
-
         <div class="layui-col-md3">
-
             <div class="layui-form-item">
                 <label class="layui-form-label">是否停用</label>
                 <div class="layui-input-block">
-                    <input type="checkbox" name="status" title="">
+                    <input type="checkbox" name="status" title="停用">
                 </div>
             </div>
-
         </div>
-
-
     </div>
 
     <div class="layui-row">
-
         <div class="layui-col-md3">
             <div class="layui-form-item">
                 <label class="layui-form-label">所属城市</label>
@@ -55,77 +41,32 @@
                 </div>
             </div>
         </div>
-
         <div class="layui-col-md3">
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
-##                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                ##                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
         </div>
-
     </div>
 
 </form>
 
-<table class="layui-table"
-       lay-data="{height:332, url:'/company/query?currentPage=1&pageSize=10', page:false, limit:10, id:'idTest'}"
-       lay-filter="demo">
-    <thead>
-    <tr>
-        <th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
+<table id="companys_table"></table>
 
-    </tr>
-    </thead>
-</table>
-
-
-
-<script src="/static/layui/layui.all.js"></script>
-<script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
-<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
-<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
-<script>
-    layui.use('form', function(){
-        var form = layui.form;
-        //监听提交
-        form.on('submit(formDemo)', function(data){
-            layer.msg(JSON.stringify(data.field));
-            return false;
-        });
-    });
-
-    layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element'], function() {
-
-        var laydate = layui.laydate //日期
-                ,laypage = layui.laypage //分页
-                ,layer = layui.layer //弹层
-                ,table = layui.table //表格
-                ,carousel = layui.carousel //轮播
-                ,upload = layui.upload //上传
-                ,element = layui.element; //元素操作
-
-        //分页
-        laypage.render({
-            elem: 'pageDemo' //分页容器的id
-            , count: 100 //总页数
-            , skin: '#1E9FFF' //自定义选中色值
-            ,skip: true //开启跳页
-            , jump: function (obj, first) {
-                if (!first) {
-                    layer.msg('第' + obj.curr + '页');
-                }
-            }
-        });
-    });
-
-</script>
-<script type="text/html" id="barDemo">
+<script type="text/html" id="oparatorBar">
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
     <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+</script>
+<script>
+    var elem = '#companys_table';
+    var url = '/company/query';
+    var cols = [[
+        {field: 'id', title: 'ID'}
+    ]];
+    renderTable(elem, url, cols);
 </script>
 <script type="text/babel"></script>
 

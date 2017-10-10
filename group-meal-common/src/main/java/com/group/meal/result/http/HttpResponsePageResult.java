@@ -8,18 +8,16 @@ import com.group.meal.result.PageResult;
  */
 public class HttpResponsePageResult<T> extends PageResult<T> implements HttpResponseResult{
 
-    private Integer HttpStatus = DEFAULT_HTTP_STATUS;
-
-
+    private Integer httpStatus = DEFAULT_HTTP_STATUS;
 
     @Override
     public Integer getHttpStatus() {
-        return HttpStatus;
+        return httpStatus;
     }
 
     @Override
     public void setHttpStatus(Integer httpStatus) {
-        HttpStatus = httpStatus;
+        this.httpStatus = httpStatus;
     }
 
 }

@@ -2,6 +2,8 @@
 
 <html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/static/layui/css/layui.css">
 
     <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
@@ -10,12 +12,13 @@
     <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
 
     <script src="/static/layui/layui.all.js"></script>
+    <script src="/static/js/common.js"></script>
 
 </head>
 <body>
 
 <div class="content">
-    #parse("/layout/nav.vm")
+##    #parse("/layout/nav.vm")
     <div class="content-info">
 ##        #parse("/common/leftMenu.vm")
         <div class="content-main">
