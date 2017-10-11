@@ -35,7 +35,8 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public boolean update(GroupCompanyDO groupCompanyDO) {
-        return false;
+        int count = groupCompanyDao.updateByPrimaryKeySelective(groupCompanyDO);
+        return count == 1 ? true : false;
     }
 
     @Override

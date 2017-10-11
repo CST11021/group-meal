@@ -11,6 +11,8 @@ import com.group.meal.util.company.CompanyUtil;
 import com.group.meal.vo.company.CompanyQueryVO;
 import com.group.meal.vo.company.CompanyResultVO;
 import com.group.meal.vo.company.CompanySaveVO;
+import com.group.meal.vo.company.CompanyUpdateVO;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,16 +56,26 @@ public class CompanyController {
     @ResponseBody
     @RequestMapping("/save")
     public BaseResult save(@RequestParam CompanySaveVO saveVO) {
+        if (StringUtils.isBlank(saveVO.getFullName()) || StringUtils.isBlank(saveVO.getShortName())
+                || StringUtils.isBlank(saveVO.getOwnerCity()) || StringUtils.isBlank(saveVO.getArea())
+                || StringUtils.isBlank(saveVO.getAddress()) || StringUtils.isBlank(saveVO.getContactPerson())
+                || StringUtils.isBlank(saveVO.getContactPhone()) || StringUtils.isBlank(saveVO.getCooperationStartTime())
+                || StringUtils.isBlank(saveVO.getCooperationEndTime())) {
+            return BaseResult.makeFail(MealResultCodeEnum.MEAL_PARAM_ERROR);
+        }
         GroupCompanyDO companyDO = CompanyUtil.convert(saveVO);
+        companyDO.setStatus(Byte.valueOf("1"));
+        companyDO.setIsDel(Byte.valueOf("0"));
         boolean success = companyService.save(companyDO);
         return success ? BaseResult.makeSuccess() : BaseResult.makeFail(MealResultCodeEnum.MEAL_SYSTEM_ERROR);
     }
 
     @ResponseBody
     @RequestMapping("/update")
-    public BaseResult update() {
-
-        return null;
+    public BaseResult update(@RequestParam CompanyUpdateVO updateVO) {
+        GroupCompanyDO companyDO = CompanyUtil.convert(updateVO);
+        boolean success = companyService.update(companyDO);
+        return success ? BaseResult.makeSuccess() : BaseResult.makeFail(MealResultCodeEnum.MEAL_SYSTEM_ERROR);
     }
 
     @ResponseBody

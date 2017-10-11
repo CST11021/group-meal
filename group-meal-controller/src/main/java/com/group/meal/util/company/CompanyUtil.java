@@ -11,6 +11,7 @@ import com.group.meal.utils.date.DateUtil;
 import com.group.meal.vo.company.CompanyQueryVO;
 import com.group.meal.vo.company.CompanyResultVO;
 import com.group.meal.vo.company.CompanySaveVO;
+import com.group.meal.vo.company.CompanyUpdateVO;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 
@@ -21,6 +22,8 @@ import java.util.List;
  * @create 2017/9/25 14:40
  */
 public class CompanyUtil{
+
+    private final static String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     public static GroupCompanyDO convert(CompanySaveVO saveVO) {
         if (saveVO == null) {
@@ -94,5 +97,11 @@ public class CompanyUtil{
         return httpResponseResult;
     }
 
-
+    public static GroupCompanyDO convert(CompanyUpdateVO updateVO) {
+        GroupCompanyDO companyDO = new GroupCompanyDO();
+        BeanUtils.copyProperties(updateVO, companyDO, new String[]{"cooperationStartTime", "cooperationEndTime"});
+        companyDO.setCooperationStartTime(DateUtil.parse(updateVO.getCooperationStartTime(), DEFAULT_DATE_FORMAT));
+        companyDO.setCooperationEndTime(DateUtil.parse(updateVO.getCooperationEndTime(), DEFAULT_DATE_FORMAT));
+        return companyDO;
+    }
 }

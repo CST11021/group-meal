@@ -24,9 +24,9 @@ public class CompanyUpdateVO {
 
     private String contactPhone;
 
-    private Date cooperationStartTime;
+    private String cooperationStartTime;
 
-    private Date cooperationEndTime;
+    private String cooperationEndTime;
 
     public CompanyUpdateVO() {
     }
@@ -95,19 +95,19 @@ public class CompanyUpdateVO {
         this.contactPhone = contactPhone;
     }
 
-    public Date getCooperationStartTime() {
+    public String getCooperationStartTime() {
         return cooperationStartTime;
     }
 
-    public void setCooperationStartTime(Date cooperationStartTime) {
+    public void setCooperationStartTime(String cooperationStartTime) {
         this.cooperationStartTime = cooperationStartTime;
     }
 
-    public Date getCooperationEndTime() {
+    public String getCooperationEndTime() {
         return cooperationEndTime;
     }
 
-    public void setCooperationEndTime(Date cooperationEndTime) {
+    public void setCooperationEndTime(String cooperationEndTime) {
         this.cooperationEndTime = cooperationEndTime;
     }
 

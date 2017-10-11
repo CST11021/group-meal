@@ -53,57 +53,57 @@
 
 <form id="form_id_saveCompany" class="layui-form" action="/company/save" style="display: none;">
     <div class="layui-form-item">
-        <label class="layui-form-label" style="width: 100px;">公司全称</label>
+        <label class="layui-form-label" style="width: 100px;">公司全称<a style="color: red;">*</a></label>
         <div class="layui-input-block">
-            <input type="text" name="title" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+            <input type="text" name="fullName" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label" style="width: 100px;">公司简称</label>
+        <label class="layui-form-label" style="width: 100px;">公司简称<a style="color: red;">*</a></label>
         <div class="layui-input-block">
-            <input type="text" name="title" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+            <input type="text" name="shortName" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label" style="width: 100px;">所属城市</label>
+        <label class="layui-form-label" style="width: 100px;">所属城市<a style="color: red;">*</a></label>
         <div class="layui-input-block">
-            <input type="text" name="title" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+            <input type="text" name="ownerCity" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label" style="width: 100px;">区域</label>
+        <label class="layui-form-label" style="width: 100px;">区域<a style="color: red;">*</a></label>
         <div class="layui-input-block">
-            <input type="text" name="title" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+            <input type="text" name="area" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label" style="width: 100px;">配送地址</label>
+        <label class="layui-form-label" style="width: 100px;">配送地址<a style="color: red;">*</a></label>
         <div class="layui-input-block">
-            <input type="text" name="title" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+            <input type="text" name="address" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label" style="width: 100px;">联系人</label>
+        <label class="layui-form-label" style="width: 100px;">联系人<a style="color: red;">*</a></label>
         <div class="layui-input-block">
-            <input type="text" name="title" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+            <input type="text" name="contactPerson" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label" style="width: 100px;">联系电话</label>
+        <label class="layui-form-label" style="width: 100px;">联系电话<a style="color: red;">*</a></label>
         <div class="layui-input-block">
-            <input type="text" name="title" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+            <input type="text" name="contactPhone" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label" style="width: 100px;">开始合作时间</label>
+        <label class="layui-form-label" style="width: 100px;">开始合作时间<a style="color: red;">*</a></label>
         <div class="layui-input-inline">
-            <input id="input_id_startTime" type="text" class="layui-input" placeholder="" style="width: 300px;">
+            <input type="text" name="cooperationStartTime" class="layui-input laydate" placeholder="" style="width: 300px;">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label" style="width: 100px;">截止合作时间</label>
+        <label class="layui-form-label" style="width: 100px;">截止合作时间<a style="color: red;">*</a></label>
         <div class="layui-input-inline">
-            <input id="input_id_endTime" type="text" class="layui-input" placeholder="" style="width: 300px;">
+            <input type="text" name="cooperationEndTime" class="layui-input laydate" placeholder="" style="width: 300px;">
         </div>
     </div>
     <div class="layui-form-item">
@@ -114,6 +114,67 @@
     </div>
 </form>
 
+<form id="form_id_updateCompany" class="layui-form" action="/company/update" style="display: none;">
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">公司全称</label>
+        <div class="layui-input-block">
+            <input type="text" name="fullName" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">公司简称</label>
+        <div class="layui-input-block">
+            <input type="text" name="shortName" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">所属城市</label>
+        <div class="layui-input-block">
+            <input type="text" name="ownerCity" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">区域</label>
+        <div class="layui-input-block">
+            <input type="text" name="area" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">配送地址</label>
+        <div class="layui-input-block">
+            <input type="text" name="address" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">联系人</label>
+        <div class="layui-input-block">
+            <input type="text" name="contactPerson" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">联系电话</label>
+        <div class="layui-input-block">
+            <input type="text" name="contactPhone" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" style="width: 300px;">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">开始合作时间</label>
+        <div class="layui-input-inline">
+            <input type="text" name="cooperationStartTime" class="layui-input laydate" placeholder="" style="width: 300px;">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">截止合作时间</label>
+        <div class="layui-input-inline">
+            <input type="text" name="cooperationEndTime" class="layui-input laydate" placeholder="" style="width: 300px;">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="*">确认修改</button>
+        </div>
+    </div>
+</form>
 
 
 <script src="/static/layui/layui.all.js"></script>
@@ -124,6 +185,7 @@
     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
 </script>
 <script>
+    // 渲染表格
     var table = layui.table;
     var cols = [[
         {checkbox: true, fixed: true}
@@ -166,13 +228,10 @@
         ,loading: true
     });
 
+    // 渲染日期组件
     var laydate = layui.laydate;
     laydate.render({
-        elem: '#input_id_startTime'
-        ,type: 'datetime'
-    });
-    laydate.render({
-        elem: '#input_id_endTime'
+        elem: '.laydate'
         ,type: 'datetime'
     });
 
@@ -216,10 +275,61 @@
                 layer.close(index);
             });
         } else if(obj.event === 'edit'){
-            layer.alert('编辑行：<br>'+ JSON.stringify(data));
+//            layer.alert('编辑行：<br>'+ JSON.stringify(data));
+//            obj.update({
+//                id: 123
+//            });
+
+            $('#form_id_updateCompany').find("[name='fullName']").val(data.fullName);
+            $('#form_id_updateCompany').find("[name='shortName']").val(data.shortName);
+            $('#form_id_updateCompany').find("[name='ownerCity']").val(data.ownerCity);
+            $('#form_id_updateCompany').find("[name='area']").val(data.area);
+            $('#form_id_updateCompany').find("[name='address']").val(data.address);
+            $('#form_id_updateCompany').find("[name='contactPerson']").val(data.contactPerson);
+            $('#form_id_updateCompany').find("[name='contactPhone']").val(data.contactPhone);
+            $('#form_id_updateCompany').find("[name='cooperationStartTime']").val(data.cooperationStartTime);
+            $('#form_id_updateCompany').find("[name='cooperationEndTime']").val(data.cooperationEndTime);
+            layer.open({
+                type: 1
+                ,content: $('#form_id_updateCompany')
+                ,area: ['500px', '620px']
+                ,end: function(){
+                    $('#form_id_updateCompany').css("display","none");
+                }
+            });
         }
     });
 </script>
 <script type="text/babel"></script>
 
 
+<script id="demo" type="text/html">
+    <h3>{{ d.title }}</h3>
+    <ul>
+        {{#  layui.each(d.list, function(index, item){ }}
+        <li>
+            <span>{{ item.modname }}</span>
+            <span>{{ item.alias }}：</span>
+            <span>{{ item.site || '' }}</span>
+        </li>
+        {{#  }); }}
+        {{#  if(d.list.length === 0){ }}
+        无数据
+        {{#  } }}
+    </ul>
+</script>
+
+<script>
+    var laytpl = layui.laytpl;
+    var data = { //数据
+        "title":"Layui常用模块"
+        ,"list":[
+            {"modname":"弹层","alias":"layer","site":"layer.layui.com"},
+            {"modname":"表单","alias":"form"}
+            ]
+    }
+    var getTpl = document.getElementById('demo').innerHTML
+    laytpl(getTpl).render(data, function(html){
+
+    });
+</script>
