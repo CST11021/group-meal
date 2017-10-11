@@ -55,7 +55,7 @@ public class CompanyController {
 
     @ResponseBody
     @RequestMapping("/save")
-    public BaseResult save(@RequestParam CompanySaveVO saveVO) {
+    public BaseResult save(CompanySaveVO saveVO) {
         if (StringUtils.isBlank(saveVO.getFullName()) || StringUtils.isBlank(saveVO.getShortName())
                 || StringUtils.isBlank(saveVO.getOwnerCity()) || StringUtils.isBlank(saveVO.getArea())
                 || StringUtils.isBlank(saveVO.getAddress()) || StringUtils.isBlank(saveVO.getContactPerson())
