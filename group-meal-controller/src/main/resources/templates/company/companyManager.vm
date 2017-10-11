@@ -1,56 +1,56 @@
+<form class="layui-form">
+    <div class="layui-row">
+        <div class="layui-col-md3">
+            <div class="layui-form-item">
+                <label class="layui-form-label">公司名称</label>
+                <div class="layui-input-block">
+                    <input type="text" id="id_fullName" name="fullName" placeholder="请输入公司全称，支持模糊查询" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md2">
 
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否停用</label>
+                <div class="layui-input-block">
+##                    <input id="id_status" type="checkbox" name="status" lay-skin="primary" title="">
+                    <select id="id_status" name="status" lay-filter="select_lf_status">
+                        <option value="" selected=""></option>
+                        <option value="0">否</option>
+                        <option value="1">是</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-col-md3">
+            <div class="layui-form-item">
+                <label class="layui-form-label">所属城市</label>
+                <div class="layui-input-block">
+                    <input type="text" id="id_ownerCity" name="ownerCity"
+                           placeholder="请输入公司所属城市" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md3">
+            <div class="layui-form-item">
+                <label class="layui-form-label">所属地区</label>
+                <div class="layui-input-block">
+                    <input type="text" id="id_area" name="area" placeholder="请输入公司所属地区" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 <div class="layui-row">
-    <div class="layui-col-md3">
-        <div class="layui-form-item">
-            <label class="layui-form-label">公司名称</label>
-            <div class="layui-input-block">
-                <input type="text" id="id_companyName" name="companyName" placeholder="请输入公司全称，支持模糊查询" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-    </div>
-    <div class="layui-col-md3">
-        <div class="layui-form-item">
-            <label class="layui-form-label">是否停用</label>
-            <div class="layui-input-block">
-                <input type="checkbox" id="id_status" name="status" title="">
-            </div>
-        </div>
-    </div>
-</div>
-<div class="layui-row">
-    <div class="layui-col-md3">
-        <div class="layui-form-item">
-            <label class="layui-form-label">所属城市</label>
-            <div class="layui-input-block">
-                <input type="text" id="id_ownerCity" name="ownerCity"
-                       placeholder="请输入公司所属城市" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-    </div>
-    <div class="layui-col-md3">
-        <div class="layui-form-item">
-            <label class="layui-form-label">所属地区</label>
-            <div class="layui-input-block">
-                <input type="text" id="id_area" name="area" placeholder="请输入公司所属地区" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-    </div>
-    <div class="layui-col-md3">
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button id="btn_id_queryCompany" class="layui-btn" lay-submit lay-filter="formDemo"
-                        data-type="reload">查询</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="layui-row">
-    <div class="label-col-md2">
-        <button id="btn_id_addCompany" class="layui-btn" lay-filter="addCompany">新增</button>
-    </div>
+    <button id="btn_id_addCompany" class="layui-btn" lay-filter="addCompany">新增</button>
+    <button id="btn_id_queryCompany" class="layui-btn" lay-filter="queryCompany">查询</button>
+    <button id="btn_id_delete" class="layui-btn" lay-filter="deleteCompanys">批量删除</button>
+    <button id="btn_id_delete" class="layui-btn" lay-filter="deleteCompanys">导出</button>
 </div>
 <table id="companys_table" lay-filter="lf_companys_table"></table>
-
 <form id="form_id_saveCompany" class="layui-form" style="display: none;">
     <div class="layui-form-item">
         <label class="layui-form-label" style="width: 100px;">公司全称<a style="color: red;">*</a></label>
@@ -113,7 +113,6 @@
         </div>
     </div>
 </form>
-
 <form id="form_id_updateCompany" class="layui-form" action="/company/update" method="post" style="display: none;">
     <div class="layui-form-item">
         <label class="layui-form-label" style="width: 100px;">公司全称</label>
@@ -216,7 +215,7 @@
         ,dataName: 'data' //数据列表的字段名称，默认：data
     };
     table.render({
-        id:'companyReload'
+        id:'companyTable'
         ,elem: '#companys_table' //指定原始表格元素选择器（推荐id选择器）
         ,url: '/company/query'
         ,method: 'post'
@@ -240,9 +239,12 @@
 
     // 查询绑定
     $('#btn_id_queryCompany').on('click', function(){
-        table.reload('companyReload', {
+        table.reload('companyTable', {
             where: {
-                area: $("#id_area").val()
+                fullName: $("#id_fullName").val()
+                ,status: $("#id_status").val()
+                ,ownerCity: $("#id_ownerCity").val()
+                ,area: $("#id_area").val()
             }
         });
     });
@@ -273,7 +275,7 @@
             if (res.success) {
                 layer.msg("新增成功");
                 layer.close(addCompanyLayer);
-                table.reload('companyReload', {
+                table.reload('companyTable', {
 //                    where: {
 //                        area: $("#id_area").val()
 //                    }
@@ -287,10 +289,31 @@
     });
 
     // 监听表格复选框选择
+    var ids = new Array();
     table.on('checkbox(lf_companys_table)', function(obj){
-        console.log(obj.checked); //当前是否选中状态
-        console.log(obj.data); //选中行的相关数据
-        console.log(obj.type); //如果触发的是全选，则为：all，如果触发的是单选，则为：one
+//        console.log(obj.checked); //当前是否选中状态
+//        console.log(obj.data); //选中行的相关数据
+//        console.log(obj.type); //如果触发的是全选，则为：all，如果触发的是单选，则为：one
+        if (obj.type == "one") {
+            var id = obj.data.id;
+            if (obj.checked) {
+                ids.push(id);
+            } else {
+                ids.splice($.inArray(id,ids),1);
+            }
+        } else {
+            if (obj.checked) {
+                ids = [];
+                // 获取所有的数据
+                var allRecords = table.cache.companyTable;
+                for (index in allRecords) {
+                    ids.push(allRecords[index].id);
+                }
+            } else {
+                ids = [];
+            }
+        }
+//        console.log(ids);
     });
 
     // 监听查看、编辑和删除
