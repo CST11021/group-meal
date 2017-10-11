@@ -13,6 +13,7 @@ import com.group.meal.vo.company.CompanyResultVO;
 import com.group.meal.vo.company.CompanySaveVO;
 import com.group.meal.vo.company.CompanyUpdateVO;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 
 import java.util.List;
@@ -77,9 +78,9 @@ public class CompanyUtil{
             return null;
         }
         GroupCompanyDO groupCompanyDO = new GroupCompanyDO();
-        groupCompanyDO.setArea(companyQueryVO.getArea());
-        groupCompanyDO.setFullName(companyQueryVO.getFullName());
-        groupCompanyDO.setOwnerCity(companyQueryVO.getOwnerCity());
+        groupCompanyDO.setArea(StringUtils.trimToNull(companyQueryVO.getArea()));
+        groupCompanyDO.setFullName(StringUtils.trimToNull(companyQueryVO.getFullName()));
+        groupCompanyDO.setOwnerCity(StringUtils.trimToNull(companyQueryVO.getOwnerCity()));
         groupCompanyDO.setStatus(companyQueryVO.getStatus());
 
         BaseQueryDO<GroupCompanyDO> baseQueryDO = new BaseQueryDO(
