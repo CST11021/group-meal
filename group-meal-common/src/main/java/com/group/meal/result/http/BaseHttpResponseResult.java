@@ -1,7 +1,6 @@
 package com.group.meal.result.http;
 
 import com.group.meal.result.BaseResult;
-import com.group.meal.utils.date.DateUtil;
 
 import java.io.Serializable;
 

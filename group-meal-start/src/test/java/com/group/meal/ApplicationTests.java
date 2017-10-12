@@ -20,21 +20,22 @@ import org.springframework.test.context.junit4.SpringRunner;
 @ComponentScan({"com.group.meal"})
 public class ApplicationTests {
 
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	private GroupUserDao groupUserDao;
-	@Test
-	public void contextLoads() {
-		GroupUserDO user = groupUserDao.selectByPrimaryKey(1L);
-		logger.debug(user.toString());
-		Assert.assertNotNull(user);
+    @Autowired
+    private GroupUserDao groupUserDao;
 
-	}
+    @Test
+    public void contextLoads() {
+        GroupUserDO user = groupUserDao.selectByPrimaryKey(1L);
+        logger.debug(user.toString());
+        Assert.assertNotNull(user);
 
-	@Test
-	public void test() {
-		if(true) throw new RuntimeException("just a test");
-	}
+    }
+
+    @Test
+    public void test() {
+        if (true) throw new RuntimeException("just a test");
+    }
 
 }

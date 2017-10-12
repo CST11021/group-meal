@@ -47,23 +47,23 @@
 <script src="/static/layui/layui.all.js"></script>
 <script>
     //一般直接写在一个js文件中
-    layui.use(['layer', 'form'], function(){
+    layui.use(['layer', 'form'], function () {
         var layer = layui.layer
-                ,form = layui.form
-                ,nav = layer.nav
+                , form = layui.form
+                , nav = layer.nav
 
 //        layer.msg('Hello World');
     });
 
-    layui.use('element', function(){
+    layui.use('element', function () {
         var element = layui.element;
     });
 
 
-    $(".menu-item").click(function(){
+    $(".menu-item").click(function () {
         var url = $(this).data("href");
         alert(url);
-        $('iframe#content',parent.document.body).attr("src",url);
+        $('iframe#content', parent.document.body).attr("src", url);
     });
 
 </script>

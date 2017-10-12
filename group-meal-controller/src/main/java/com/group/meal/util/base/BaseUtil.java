@@ -11,6 +11,7 @@ public class BaseUtil {
 
     /**
      * 复制一个BaseResult对象（data属性不复制）
+     *
      * @param baseResult
      * @return
      */
@@ -24,6 +25,7 @@ public class BaseUtil {
 
     /**
      * 复制一个PageResult对象（data属性不复制）
+     *
      * @param pageResult
      * @return
      */

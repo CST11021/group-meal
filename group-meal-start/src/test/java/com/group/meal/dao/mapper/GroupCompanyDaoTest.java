@@ -14,7 +14,7 @@ import java.util.List;
  * @authod wb-whz291815
  * @create 2017/9/25 17:59
  */
-public class GroupCompanyDaoTest extends ApplicationTests{
+public class GroupCompanyDaoTest extends ApplicationTests {
 
     @Autowired
     private GroupCompanyDao groupCompanyDao;

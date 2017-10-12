@@ -2,7 +2,6 @@ package com.group.meal.service.util;
 
 /**
  * 生成唯一的uniqid的工具类
- *
  */
 public class UniqUtil {
 

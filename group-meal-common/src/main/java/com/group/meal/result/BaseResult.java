@@ -40,18 +40,18 @@ public class BaseResult<T> implements Serializable {
         return result;
     }
 
-    public static <T> BaseResult<T> makeSuccess(T data){
+    public static <T> BaseResult<T> makeSuccess(T data) {
         BaseResult<T> result = new BaseResult();
         result.setData(data);
         return result;
     }
 
-    public static <T> BaseResult<T> makeFail(MealResultCodeEnum codeEnum){
+    public static <T> BaseResult<T> makeFail(MealResultCodeEnum codeEnum) {
         BaseResult<T> result = new BaseResult(codeEnum);
         return result;
     }
 
-    public static <T> BaseResult<T> makeFail(T data, MealResultCodeEnum codeEnum){
+    public static <T> BaseResult<T> makeFail(T data, MealResultCodeEnum codeEnum) {
         BaseResult<T> result = BaseResult.makeFail(codeEnum);
         result.setData(data);
         return result;

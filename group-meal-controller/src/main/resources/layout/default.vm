@@ -17,7 +17,7 @@
 <div class="content">
 ##    #parse("/layout/nav.vm")
     <div class="content-info">
-##        #parse("/common/leftMenu.vm")
+    ##        #parse("/common/leftMenu.vm")
         <div class="content-main">
             $screen_content
         </div>

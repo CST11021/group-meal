@@ -46,11 +46,11 @@
 
             <!--SpringBoot相关配置-->
             <!--<dependency>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-dependencies</artifactId>-->
-                <!--<version>${spring-boot}</version>-->
-                <!--<type>pom</type>-->
-                <!--<scope>import</scope>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-dependencies</artifactId>-->
+            <!--<version>${spring-boot}</version>-->
+            <!--<type>pom</type>-->
+            <!--<scope>import</scope>-->
             <!--</dependency>-->
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
@@ -89,7 +89,6 @@
                 <artifactId>google-collections</artifactId>
                 <version>${google-collections}</version>
             </dependency>
-
 
 
         </dependencies>

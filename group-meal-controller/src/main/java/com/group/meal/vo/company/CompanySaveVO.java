@@ -1,7 +1,5 @@
 package com.group.meal.vo.company;
 
-import java.util.Date;
-
 /**
  * @authod wb-whz291815
  * @create 2017/9/25 14:32

@@ -11,26 +11,29 @@ public class DateUtil {
 
     public static final String DEFAULT_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
-    public enum Pattern{
-        yyyyMMddHHmmssSSS,yyyyMMddHHmmss,yyyyMMddHHmm,yyyyMMddHH,yyyyMMdd,yyyyMM,yyyy;
-    }
-    public enum Unit{
-        y,M,d,H,m,s,S;
+    public enum Pattern {
+        yyyyMMddHHmmssSSS, yyyyMMddHHmmss, yyyyMMddHHmm, yyyyMMddHH, yyyyMMdd, yyyyMM, yyyy;
     }
 
-    public DateUtil() {}
+    public enum Unit {
+        y, M, d, H, m, s, S;
+    }
+
+    public DateUtil() {
+    }
 
     /**
      * 判断字符串date是否为合法时间字符串，合法格式包括：yyyyMMddHHmmssSSS、yyyyMMddHHmmss、yyyyMMddHHmm、yyyyMMddHH、yyyyMMdd、yyyyMM、yyyy
+     *
      * @param date 时间字符串，不包含“./- 年月日时分秒”特殊字符
      * @return boolean
      */
     public static boolean isValidDate(String date) {
         boolean isValid = true;
-        if(StringUtils.isNotBlank(date)){
+        if (StringUtils.isNotBlank(date)) {
             int len = StringUtils.length(date);
             SimpleDateFormat format;
-            switch (len){
+            switch (len) {
                 case 17:
                     format = new SimpleDateFormat(Pattern.yyyyMMddHHmmssSSS.toString());
                     break;
@@ -52,7 +55,8 @@ public class DateUtil {
                 case 4:
                     format = new SimpleDateFormat(Pattern.yyyy.toString());
                     break;
-                default: return false;
+                default:
+                    return false;
             }
 
             try {
@@ -61,8 +65,7 @@ public class DateUtil {
             } catch (ParseException e) {
                 isValid = false;
             }
-        }
-        else{
+        } else {
             isValid = false;
         }
         return isValid;
@@ -70,11 +73,12 @@ public class DateUtil {
 
     /**
      * 判断字符串date是否为指定日期格式
-     * @param date 时间字符串，不包含“./- 年月日时分秒”特殊字符
+     *
+     * @param date    时间字符串，不包含“./- 年月日时分秒”特殊字符
      * @param pattern 枚举类型
      * @return boolean
      */
-    public static boolean isValidDate(String date,Pattern pattern) {
+    public static boolean isValidDate(String date, Pattern pattern) {
         boolean convertSuccess = true;
         SimpleDateFormat format = new SimpleDateFormat(pattern.toString());
         try {
@@ -88,14 +92,15 @@ public class DateUtil {
 
     /**
      * 根据日期字符串date获取日期格式，无效日期时返回null
+     *
      * @param date 时间字符串，不包含“./- 年月日时分秒”特殊字符
      * @return String
      */
-    public static String getPatternByDate(String date){
+    public static String getPatternByDate(String date) {
         String pattern = null;
-        if(isValidDate(date)){
+        if (isValidDate(date)) {
             int len = StringUtils.length(date);
-            switch (len){
+            switch (len) {
                 case 17:
                     pattern = Pattern.yyyyMMddHHmmssSSS.toString();
                     break;
@@ -124,10 +129,11 @@ public class DateUtil {
 
     /**
      * 将String转为Date
+     *
      * @param date 时间字符串，不包含“./- 年月日时分秒”特殊字符,并且是合法的日期
      * @return Date
      */
-    public static Date parse(String date){
+    public static Date parse(String date) {
         String pattern = getPatternByDate(date);
         Date newDate = null;
         try {
@@ -140,6 +146,7 @@ public class DateUtil {
 
     /**
      * 将指定的日期转为Date
+     *
      * @param date
      * @param pattern
      * @return
@@ -156,23 +163,25 @@ public class DateUtil {
 
     /**
      * 将Date转为String
-     * @param date Date
+     *
+     * @param date    Date
      * @param pattern 自定义格式
      * @return String
      */
-    public static String format(Date date,String pattern){
+    public static String format(Date date, String pattern) {
         return new SimpleDateFormat(pattern).format(date);
     }
 
     /**
      * 根据生日计算年龄
+     *
      * @param birthday Date类型
      * @return int
      */
-    public static int getAgeByBirthday(Date birthday){
+    public static int getAgeByBirthday(Date birthday) {
         int age = 0;
         Calendar cal = Calendar.getInstance();
-        if(cal.before(birthday)){
+        if (cal.before(birthday)) {
             throw new IllegalArgumentException("the birday is before");
         }
         int yearNow = cal.get(Calendar.YEAR);
@@ -180,15 +189,15 @@ public class DateUtil {
         int dayOfMonthNow = cal.get(Calendar.DAY_OF_MONTH);
         cal.setTime(birthday);
         int yearBirth = cal.get(Calendar.YEAR);
-        int monthBirth = cal.get(Calendar.MONTH)+1;
+        int monthBirth = cal.get(Calendar.MONTH) + 1;
         int dayOfMonthBirth = cal.get(Calendar.DAY_OF_MONTH);
-        age = yearNow-yearBirth;
-        if(monthNow<=monthBirth){
-            if(monthNow==monthBirth){
-                if(dayOfMonthNow<dayOfMonthBirth){
+        age = yearNow - yearBirth;
+        if (monthNow <= monthBirth) {
+            if (monthNow == monthBirth) {
+                if (dayOfMonthNow < dayOfMonthBirth) {
                     age--;
                 }
-            }else{
+            } else {
                 age--;
             }
         }
@@ -197,9 +206,10 @@ public class DateUtil {
 
     /**
      * 计算时间，interval可为负数，表示时间扣除
+     *
      * @param interval 时间差
-     * @param unit 单位Unit
-     * @param date 时间Date
+     * @param unit     单位Unit
+     * @param date     时间Date
      * @return Date
      */
     public static Date calculateTime(int interval, Unit unit, Date date) {
@@ -218,7 +228,7 @@ public class DateUtil {
             calendar.add(Calendar.MINUTE, interval);
         } else if ("s".equalsIgnoreCase(dw)) {
             calendar.add(Calendar.SECOND, interval);
-        } else{
+        } else {
             calendar.add(Calendar.MILLISECOND, interval);
         }
         Date dat = calendar.getTime();
@@ -234,23 +244,26 @@ public class DateUtil {
      *     long endTime = currentTimeMillis();
      *     long intervalMis = endTime - startTime;
      * </pre>
+     *
      * @return
      */
-    public static long currentTimeMillis(){
+    public static long currentTimeMillis() {
         return System.currentTimeMillis();
     }
 
     /**
      * 删除特殊字符，包括：“年月日时分秒 :-/.”
+     *
      * @param date
      * @return
      */
-    public static String delSpecialChar(String date){
+    public static String delSpecialChar(String date) {
         return StringUtils.replaceChars(date, "年月日时分秒 :-/.", "");
     }
 
     /**
      * 根据给定的date获取当前星期几
+     *
      * @param date
      * @return
      */

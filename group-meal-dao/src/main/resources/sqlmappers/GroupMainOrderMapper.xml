@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.group.meal.dao.mapper.GroupMainOrderDao">
-  <resultMap id="BaseResultMap" type="com.group.meal.dao.dataobject.GroupMainOrderDO">
-    <constructor>
-      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="gmt_create" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="gmt_modified" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="status" javaType="java.lang.Byte" jdbcType="TINYINT" />
-      <arg column="main_order_code" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="warehouse_code" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="company_id" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="employee_id" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="meal_type" javaType="java.lang.Byte" jdbcType="TINYINT" />
-      <arg column="deadline_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="remark" javaType="java.lang.String" jdbcType="VARCHAR" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, status, main_order_code, warehouse_code, company_id, 
-    employee_id, meal_type, deadline_time, remark
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from group_main_order
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from group_main_order
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="com.group.meal.dao.dataobject.GroupMainOrderDO">
+    <resultMap id="BaseResultMap" type="com.group.meal.dao.dataobject.GroupMainOrderDO">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="gmt_create" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="gmt_modified" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="status" javaType="java.lang.Byte" jdbcType="TINYINT"/>
+            <arg column="main_order_code" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="warehouse_code" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="company_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="employee_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="meal_type" javaType="java.lang.Byte" jdbcType="TINYINT"/>
+            <arg column="deadline_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="remark" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, gmt_create, gmt_modified, status, main_order_code, warehouse_code, company_id,
+        employee_id, meal_type, deadline_time, remark
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from group_main_order
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from group_main_order
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.group.meal.dao.dataobject.GroupMainOrderDO">
     insert into group_main_order (id, gmt_create, gmt_modified, 
       status, main_order_code, warehouse_code, 
       company_id, employee_id, meal_type, 
@@ -40,116 +40,116 @@
       #{companyId,jdbcType=BIGINT}, #{employeeId,jdbcType=BIGINT}, #{mealType,jdbcType=TINYINT}, 
       #{deadlineTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.group.meal.dao.dataobject.GroupMainOrderDO">
-    insert into group_main_order
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create,
-      </if>
-      <if test="gmtModified != null">
-        gmt_modified,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="mainOrderCode != null">
-        main_order_code,
-      </if>
-      <if test="warehouseCode != null">
-        warehouse_code,
-      </if>
-      <if test="companyId != null">
-        company_id,
-      </if>
-      <if test="employeeId != null">
-        employee_id,
-      </if>
-      <if test="mealType != null">
-        meal_type,
-      </if>
-      <if test="deadlineTime != null">
-        deadline_time,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="gmtCreate != null">
-        #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null">
-        #{gmtModified,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=TINYINT},
-      </if>
-      <if test="mainOrderCode != null">
-        #{mainOrderCode,jdbcType=VARCHAR},
-      </if>
-      <if test="warehouseCode != null">
-        #{warehouseCode,jdbcType=VARCHAR},
-      </if>
-      <if test="companyId != null">
-        #{companyId,jdbcType=BIGINT},
-      </if>
-      <if test="employeeId != null">
-        #{employeeId,jdbcType=BIGINT},
-      </if>
-      <if test="mealType != null">
-        #{mealType,jdbcType=TINYINT},
-      </if>
-      <if test="deadlineTime != null">
-        #{deadlineTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.group.meal.dao.dataobject.GroupMainOrderDO">
-    update group_main_order
-    <set>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null">
-        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=TINYINT},
-      </if>
-      <if test="mainOrderCode != null">
-        main_order_code = #{mainOrderCode,jdbcType=VARCHAR},
-      </if>
-      <if test="warehouseCode != null">
-        warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
-      </if>
-      <if test="companyId != null">
-        company_id = #{companyId,jdbcType=BIGINT},
-      </if>
-      <if test="employeeId != null">
-        employee_id = #{employeeId,jdbcType=BIGINT},
-      </if>
-      <if test="mealType != null">
-        meal_type = #{mealType,jdbcType=TINYINT},
-      </if>
-      <if test="deadlineTime != null">
-        deadline_time = #{deadlineTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.group.meal.dao.dataobject.GroupMainOrderDO">
+    <insert id="insertSelective" parameterType="com.group.meal.dao.dataobject.GroupMainOrderDO">
+        insert into group_main_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="mainOrderCode != null">
+                main_order_code,
+            </if>
+            <if test="warehouseCode != null">
+                warehouse_code,
+            </if>
+            <if test="companyId != null">
+                company_id,
+            </if>
+            <if test="employeeId != null">
+                employee_id,
+            </if>
+            <if test="mealType != null">
+                meal_type,
+            </if>
+            <if test="deadlineTime != null">
+                deadline_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="mainOrderCode != null">
+                #{mainOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseCode != null">
+                #{warehouseCode,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                #{companyId,jdbcType=BIGINT},
+            </if>
+            <if test="employeeId != null">
+                #{employeeId,jdbcType=BIGINT},
+            </if>
+            <if test="mealType != null">
+                #{mealType,jdbcType=TINYINT},
+            </if>
+            <if test="deadlineTime != null">
+                #{deadlineTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.group.meal.dao.dataobject.GroupMainOrderDO">
+        update group_main_order
+        <set>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="mainOrderCode != null">
+                main_order_code = #{mainOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseCode != null">
+                warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                company_id = #{companyId,jdbcType=BIGINT},
+            </if>
+            <if test="employeeId != null">
+                employee_id = #{employeeId,jdbcType=BIGINT},
+            </if>
+            <if test="mealType != null">
+                meal_type = #{mealType,jdbcType=TINYINT},
+            </if>
+            <if test="deadlineTime != null">
+                deadline_time = #{deadlineTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.group.meal.dao.dataobject.GroupMainOrderDO">
     update group_main_order
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},

@@ -24,12 +24,14 @@
     contact_person, contact_phone, cooperation_start_time, cooperation_end_time, is_del
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"/>
+        select
+        <include refid="Base_Column_List"/>
         from group_company
         where id = #{id,jdbcType=BIGINT}
     </select>
     <select id="selectByCondition" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"/>
+        select
+        <include refid="Base_Column_List"/>
         from group_company
         <trim suffixOverrides="and">
             <where>
@@ -136,9 +138,9 @@
         </trim>
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from group_company
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete from group_company
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
     <delete id="deleteByIds">
         delete from group_company
         where id IN

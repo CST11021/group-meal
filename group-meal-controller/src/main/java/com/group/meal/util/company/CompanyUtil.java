@@ -5,8 +5,6 @@ import com.group.meal.dao.dataobject.GroupCompanyDO;
 import com.group.meal.dao.query.BaseQueryDO;
 import com.group.meal.result.PageResult;
 import com.group.meal.result.http.HttpResponsePageResult;
-import com.group.meal.result.http.HttpResponseResult;
-import com.group.meal.util.base.BaseUtil;
 import com.group.meal.utils.date.DateUtil;
 import com.group.meal.vo.company.CompanyQueryVO;
 import com.group.meal.vo.company.CompanyResultVO;
@@ -22,7 +20,7 @@ import java.util.List;
  * @authod wb-whz291815
  * @create 2017/9/25 14:40
  */
-public class CompanyUtil{
+public class CompanyUtil {
 
     private final static String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 

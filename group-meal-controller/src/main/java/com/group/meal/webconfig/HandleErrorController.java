@@ -3,7 +3,6 @@ package com.group.meal.webconfig;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 /**
  * 定义404页面处理

@@ -1,6 +1,5 @@
 package com.group.meal.webconfig;
 
-import com.group.meal.controller.company.CompanyController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -25,7 +24,7 @@ public class HandlerExceptionController {
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
         // 这里需要输出异常日志，否则出现Exception异常时，不会输出异常信息
-        logger.error("系统错误",e);
+        logger.error("系统错误", e);
         ModelAndView mav = new ModelAndView();
         mav.addObject("exception", e);
         mav.addObject("url", req.getRequestURL());

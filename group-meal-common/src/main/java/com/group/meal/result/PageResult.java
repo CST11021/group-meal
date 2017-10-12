@@ -23,7 +23,7 @@ public class PageResult<T> extends BaseResult<T> implements Serializable {
         this.setData(result);
     }
 
-    public static<T> PageResult<T> makeSuccess(int totalCount, T data) {
+    public static <T> PageResult<T> makeSuccess(int totalCount, T data) {
         PageResult<T> result = new PageResult<T>();
         result.setSuccess(true);
         result.setCount(totalCount);

@@ -1,5 +1,3 @@
-
-
 <ul class="layui-nav" lay-filter="">
     <li class="layui-nav-item layui-this"><a class="menu-item" href="/company/manager" target="manager">企业管理</a></li>
     <li class="layui-nav-item"><a class="menu-item" href="/item/query" target="manager">菜品管理</a></li>
@@ -33,22 +31,22 @@
 
 <script>
     //一般直接写在一个js文件中
-    layui.use(['layer', 'form'], function(){
+    layui.use(['layer', 'form'], function () {
         var layer = layui.layer
-                ,form = layui.form
-                ,nav = layer.nav
+                , form = layui.form
+                , nav = layer.nav
 
 //        layer.msg('Hello World');
     });
 
-    layui.use('element', function(){
+    layui.use('element', function () {
         var element = layui.element;
     });
 
 
-    $(".menu-item").click(function(){
+    $(".menu-item").click(function () {
         var url = $(this).data("href");
-        $('iframe#content',parent.document.body).attr("src",url);
+        $('iframe#content', parent.document.body).attr("src", url);
     });
 
 </script>
