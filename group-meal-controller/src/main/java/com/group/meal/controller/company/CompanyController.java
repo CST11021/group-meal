@@ -68,8 +68,8 @@ public class CompanyController {
             return BaseResult.makeFail(MealResultCodeEnum.MEAL_PARAM_ERROR);
         }
         GroupCompanyDO companyDO = CompanyUtil.convert(saveVO);
-        companyDO.setStatus(Byte.valueOf("1"));
-        companyDO.setIsDel(Byte.valueOf("0"));
+        companyDO.setStatus((byte) 1);
+        companyDO.setIsDel((byte) 0);
         boolean success = companyService.save(companyDO);
         return success ? BaseResult.makeSuccess() : BaseResult.makeFail(MealResultCodeEnum.MEAL_SYSTEM_ERROR);
     }
