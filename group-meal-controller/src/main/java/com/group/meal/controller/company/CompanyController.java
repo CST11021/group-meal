@@ -9,6 +9,7 @@ import com.group.meal.result.PageResult;
 import com.group.meal.result.http.HttpResponsePageResult;
 import com.group.meal.service.local.company.CompanyService;
 import com.group.meal.util.company.CompanyUtil;
+import com.group.meal.utils.ImportAndExportExcelUtil;
 import com.group.meal.vo.company.CompanyQueryVO;
 import com.group.meal.vo.company.CompanyResultVO;
 import com.group.meal.vo.company.CompanySaveVO;
@@ -22,9 +23,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.support.HttpRequestHandlerServlet;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
+
+import static com.group.meal.constant.GroupMealConstant.TEMP_SAVE_EXCEL_FOLDER_NAME;
+import static com.group.meal.utils.ImportAndExportExcelUtil.EXCEL_SUFFIX_XLSX;
+import static com.group.meal.utils.ImportAndExportExcelUtil.FILE_SEPARATOR;
 
 /**
  * @authod wb-whz291815
@@ -41,7 +50,6 @@ public class CompanyController {
 
     @RequestMapping("/manager")
     public ModelAndView manager(CompanyQueryVO queryVO) {
-
         return new ModelAndView("/company/companyManager");
     }
 
@@ -52,7 +60,6 @@ public class CompanyController {
         PageResult<List<GroupCompanyDO>> pageResult = companyService.queryPageByCondition(baseQueryDO);
         return CompanyUtil.convert(pageResult);
     }
-
 
     @ResponseBody
     @RequestMapping("/save")
@@ -89,4 +96,22 @@ public class CompanyController {
         return BaseResult.makeSuccess(count).setMsg("成功删除了" + count + "条记录");
     }
 
+
+    @RequestMapping("/exportCompanys")
+    public void exportCompanys(CompanyQueryVO queryVO, HttpServletRequest request, HttpServletResponse response) {
+        List<GroupCompanyDO> companyDOList = companyService.queryAllByCondition(CompanyUtil.convertToDO(queryVO));
+        List<Map<String, String>> records = CompanyUtil.convertToMap(companyDOList);
+        List<String> headFields = Lists.newArrayList(new String[]{"ID","创建时间","修改时间","公司全称","公司简称"
+                ,"所属城市","所属区域","配置送地址","联系人","联系人电话","是否启动","开始合作时间","截止合作时间"});
+        String sheetName = "合作公司";
+
+        String filePath = ImportAndExportExcelUtil.createSaveExcelFolder(request, TEMP_SAVE_EXCEL_FOLDER_NAME)
+                + FILE_SEPARATOR + System.currentTimeMillis() + EXCEL_SUFFIX_XLSX;
+        boolean flag = ImportAndExportExcelUtil.createExcelFile(headFields, records, sheetName, filePath);
+        if (flag) {
+            ImportAndExportExcelUtil.downloadFromService(filePath, response);
+        }
+//        return flag? BaseResult.makeSuccess("导出成功") :
+//                BaseResult.makeFail(MealResultCodeEnum.MEAL_PARAM_ERROR).setMsg("导出失败");
+    }
 }

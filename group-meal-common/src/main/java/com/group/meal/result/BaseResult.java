@@ -40,6 +40,11 @@ public class BaseResult<T> implements Serializable {
         return result;
     }
 
+    public static BaseResult<Void> makeSuccess(String msg) {
+        BaseResult<Void> result = new BaseResult().setMsg(msg);
+        return result;
+    }
+
     public static <T> BaseResult<T> makeSuccess(T data) {
         BaseResult<T> result = new BaseResult();
         result.setData(data);

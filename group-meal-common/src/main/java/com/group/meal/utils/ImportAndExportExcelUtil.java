@@ -31,7 +31,7 @@ public class ImportAndExportExcelUtil {
      * @param request
      * @param folderName 要创建的文件夹名称
      */
-    private static String createFolderName(HttpServletRequest request, String folderName) {
+    public static String createSaveExcelFolder(HttpServletRequest request, String folderName) {
         // 创建一个文件夹，用来保存Excel文件
         String folderPath = request.getSession().getServletContext().getRealPath(folderName);
         File file = new File(folderPath);
@@ -59,7 +59,7 @@ public class ImportAndExportExcelUtil {
             XSSFSheet sheet = workbook.createSheet(sheetName);
             XSSFRow row = sheet.createRow(0);
 
-            int cell = 1;
+            int cell = 0;
             for (String columName : headFields) {
                 row.createCell(cell).setCellValue(columName);
                 cell++;
@@ -68,7 +68,7 @@ public class ImportAndExportExcelUtil {
             int rw = 1;
             for (Map<String, String> record : records) {
                 XSSFRow xrow = sheet.createRow(rw);
-                cell = 1;
+                cell = 0;
                 for (String columName : headFields) {
                     xrow.createCell(cell).setCellValue(record.get(columName));
                     cell++;
@@ -145,7 +145,7 @@ public class ImportAndExportExcelUtil {
      * @param path 服务器上的文件路径（路径 + 文件名 + 后缀）
      * @param response
      */
-    public void downloadFromService(String path, HttpServletResponse response) {
+    public static void downloadFromService(String path, HttpServletResponse response) {
         try {
             File file = new File(path);
             String fileName = file.getName();
@@ -353,7 +353,7 @@ public class ImportAndExportExcelUtil {
         }
 
         // 创建一个保存Excel的文件夹
-        String folderPath = createFolderName(request, "exportDocs");
+        String folderPath = createSaveExcelFolder(request, "exportDocs");
         String filePath = folderPath + FILE_SEPARATOR + "人员信息" + EXCEL_SUFFIX_XLSX;
 
         // 创建Excel文件，数据导入Excel，然后保存到指定的服务器路径

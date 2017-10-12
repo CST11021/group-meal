@@ -2,7 +2,7 @@
 #set($layout = "/layout/default.vm")
 
 ##查询表单
-<form class="layui-form">
+<form class="layui-form" id="form_id_query">
     <div class="layui-row">
         <div class="layui-col-md3">
             <div class="layui-form-item">
@@ -55,7 +55,7 @@
     <button id="btn_id_addCompany" class="layui-btn" lay-filter="addCompany">新增</button>
     <button id="btn_id_queryCompany" class="layui-btn" lay-filter="queryCompany">查询</button>
     <button id="btn_id_mulDelete" class="layui-btn" lay-filter="deleteCompanys">批量删除</button>
-    <button id="btn_id_export" class="layui-btn" lay-filter="deleteCompanys">导出</button>
+    <button id="btn_id_export" class="layui-btn" lay-filter="exprotExcel">导出</button>
 </div>
 <table id="companys_table" lay-filter="lf_companys_table"></table>
 <form id="form_id_saveCompany" class="layui-form" style="display: none;">
@@ -347,7 +347,6 @@
             layer.close(index);
         });
     });
-
     function mulDelete(ids) {
         $.post("/company/mulDelete", {"ids": ids}, function (res) {
             if (res.success) {
@@ -358,6 +357,13 @@
             }
         });
     }
+
+    // 导出Excel绑定
+    $('#btn_id_export').on('click', function () {
+        var frame = document.getElementById("form_id_query");
+        frame.action = '/company/exportCompanys';
+        frame.submit();
+    });
 
     // 监听查看、编辑和删除
     var updateCompanyLayer;// 表示编辑弹出层

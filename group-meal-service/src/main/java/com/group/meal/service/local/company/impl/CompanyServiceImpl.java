@@ -44,4 +44,9 @@ public class CompanyServiceImpl implements CompanyService {
         int count = groupCompanyDao.deleteByIds(ids);
         return count;
     }
+
+    @Override
+    public List<GroupCompanyDO> queryAllByCondition(GroupCompanyDO condition) {
+        return groupCompanyDao.selectAllByCondition(condition);
+    }
 }

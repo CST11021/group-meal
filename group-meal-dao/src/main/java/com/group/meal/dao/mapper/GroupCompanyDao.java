@@ -30,6 +30,8 @@ public interface GroupCompanyDao {
 
     List<GroupCompanyDO> selectByCondition(BaseQueryDO<GroupCompanyDO> condition);
 
+    List<GroupCompanyDO> selectAllByCondition(GroupCompanyDO condition);
+
     long countByCondition(BaseQueryDO<GroupCompanyDO> condition);
 
     int updateByPrimaryKeySelective(GroupCompanyDO record);

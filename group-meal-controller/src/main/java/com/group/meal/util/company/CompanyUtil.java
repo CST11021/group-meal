@@ -14,7 +14,9 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @authod wb-whz291815
@@ -75,16 +77,42 @@ public class CompanyUtil {
         if (companyQueryVO == null) {
             return null;
         }
+        GroupCompanyDO groupCompanyDO = convertToDO(companyQueryVO);
+        BaseQueryDO<GroupCompanyDO> baseQueryDO = new BaseQueryDO(
+                groupCompanyDO, companyQueryVO.getCurrentPage(), companyQueryVO.getPageSize());
+
+        return baseQueryDO;
+    }
+
+    public static GroupCompanyDO convertToDO(CompanyQueryVO companyQueryVO) {
         GroupCompanyDO groupCompanyDO = new GroupCompanyDO();
         groupCompanyDO.setArea(StringUtils.trimToNull(companyQueryVO.getArea()));
         groupCompanyDO.setFullName(StringUtils.trimToNull(companyQueryVO.getFullName()));
         groupCompanyDO.setOwnerCity(StringUtils.trimToNull(companyQueryVO.getOwnerCity()));
         groupCompanyDO.setStatus(companyQueryVO.getStatus());
+        return groupCompanyDO;
+    }
 
-        BaseQueryDO<GroupCompanyDO> baseQueryDO = new BaseQueryDO(
-                groupCompanyDO, companyQueryVO.getCurrentPage(), companyQueryVO.getPageSize());
-
-        return baseQueryDO;
+    public static List<Map<String, String>> convertToMap(List<GroupCompanyDO> companyDOList) {
+        List<Map<String, String>> records = Lists.newArrayList();
+        companyDOList.stream().forEach(groupCompanyDO -> {
+            Map<String, String> record = new HashMap<String, String>();
+            record.put("ID", groupCompanyDO.getId().toString());
+            record.put("创建时间", DateUtil.format(groupCompanyDO.getGmtCreate(), DateUtil.DEFAULT_PATTERN));
+            record.put("修改时间", DateUtil.format(groupCompanyDO.getGmtModified(), DateUtil.DEFAULT_PATTERN));
+            record.put("公司全称", groupCompanyDO.getFullName());
+            record.put("公司简称", groupCompanyDO.getShortName());
+            record.put("所属城市", groupCompanyDO.getOwnerCity());
+            record.put("所属区域", groupCompanyDO.getArea());
+            record.put("配置送地址", groupCompanyDO.getAddress());
+            record.put("联系人", groupCompanyDO.getContactPerson());
+            record.put("联系人电话", groupCompanyDO.getContactPhone());
+            record.put("是否启动", groupCompanyDO.getStatus() == 0 ? "是" : "否");
+            record.put("开始合作时间", DateUtil.format(groupCompanyDO.getCooperationStartTime(), DateUtil.DEFAULT_PATTERN));
+            record.put("截止合作时间", DateUtil.format(groupCompanyDO.getCooperationEndTime(), DateUtil.DEFAULT_PATTERN));
+            records.add(record);
+        });
+        return records;
     }
 
     public static HttpResponsePageResult<List<CompanyResultVO>> convert(PageResult<List<GroupCompanyDO>> pageResult) {

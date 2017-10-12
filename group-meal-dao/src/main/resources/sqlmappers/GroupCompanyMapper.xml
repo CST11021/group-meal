@@ -85,7 +85,6 @@
         <if test="currentPage != null and pageSize != null">
             limit #{startRow}, #{pageSize}
         </if>
-
     </select>
     <select id="countByCondition" resultType="java.lang.Long">
         select count(*)
@@ -123,7 +122,7 @@
                     contact_person = #{queryParam.contactPerson,jdbcType=VARCHAR} and
                 </if>
                 <if test="queryParam.contactPhone != null">
-                    contact_phone = #{contactPhone,jdbcType=VARCHAR} and
+                    contact_phone = #{queryParam.contactPhone,jdbcType=VARCHAR} and
                 </if>
                 <if test="queryParam.cooperationStartTime != null">
                     cooperation_start_time = #{queryParam.cooperationStartTime,jdbcType=TIMESTAMP} and
@@ -136,6 +135,58 @@
                 </if>
             </where>
         </trim>
+    </select>
+    <select id="selectAllByCondition" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from group_company
+        <trim suffixOverrides="and">
+            <where>
+                <if test="id != null">
+                    id = #{id,jdbcType=BIGINT}
+                </if>
+                <if test="gmtCreate != null">
+                    gmt_create = #{gmtCreate,jdbcType=TIMESTAMP} and
+                </if>
+                <if test="gmtModified != null">
+                    gmt_modified = #{gmtModified,jdbcType=TIMESTAMP} and
+                </if>
+                <if test="status != null">
+                    status = #{status,jdbcType=TINYINT} and
+                </if>
+                <if test="fullName != null">
+                    full_name = #{fullName,jdbcType=VARCHAR} and
+                </if>
+                <if test="shortName != null">
+                    short_name = #{shortName,jdbcType=VARCHAR} and
+                </if>
+                <if test="ownerCity != null">
+                    owner_city = #{ownerCity,jdbcType=VARCHAR} and
+                </if>
+                <if test="area != null">
+                    area = #{area,jdbcType=VARCHAR} and
+                </if>
+                <if test="address != null">
+                    address = #{address,jdbcType=VARCHAR} and
+                </if>
+                <if test="contactPerson != null">
+                    contact_person = #{contactPerson,jdbcType=VARCHAR} and
+                </if>
+                <if test="contactPhone != null">
+                    contact_phone = #{contactPhone,jdbcType=VARCHAR} and
+                </if>
+                <if test="cooperationStartTime != null">
+                    cooperation_start_time = #{cooperationStartTime,jdbcType=TIMESTAMP} and
+                </if>
+                <if test="cooperationEndTime != null">
+                    cooperation_end_time = #{cooperationEndTime,jdbcType=TIMESTAMP} and
+                </if>
+                <if test="isDel != null">
+                    is_del = #{isDel,jdbcType=TINYINT} and
+                </if>
+            </where>
+        </trim>
+        order by gmt_create desc
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from group_company

@@ -15,4 +15,6 @@ public interface CompanyService {
     boolean update(GroupCompanyDO groupCompanyDO);
 
     int mulDelete(List<Long> ids);
+
+    List<GroupCompanyDO> queryAllByCondition(GroupCompanyDO condition);
 }
