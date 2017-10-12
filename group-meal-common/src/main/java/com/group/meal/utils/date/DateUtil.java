@@ -122,6 +122,7 @@ public class DateUtil {
                 case 4:
                     pattern = Pattern.yyyy.toString();
                     break;
+                default:pattern = null;
             }
         }
         return pattern;
