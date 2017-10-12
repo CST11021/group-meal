@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>后台管理系统</title>
-    <link rel="stylesheet" href="/static/layui/css/layui.css">
-</head>
-<body>
-
 <ul class="layui-nav" lay-filter="">
     <li class="layui-nav-item layui-this"><a class="menu-item" href="/company/manager" target="manager">企业管理</a></li>
     <li class="layui-nav-item"><a class="menu-item" href="/item/query" target="manager">菜品管理</a></li>
@@ -39,7 +29,6 @@
 <iframe id="content" name="manager" src="/company/manager" style="overflow:visible;"
         scrolling="yes" frameborder="no" width="100%" height="800px"></iframe>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="/static/layui/layui.all.js"></script>
 <script>
     //一般直接写在一个js文件中
@@ -63,5 +52,3 @@
 
 </script>
 
-</body>
-</html>

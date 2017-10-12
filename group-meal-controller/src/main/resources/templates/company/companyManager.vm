@@ -1,3 +1,6 @@
+#set($title = "企业管理")
+#set($layout = "/layout/default.vm")
+
 <form class="layui-form">
     <div class="layui-row">
         <div class="layui-col-md3">
