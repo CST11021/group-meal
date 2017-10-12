@@ -4,11 +4,14 @@ package com.group.meal.dao.mapper;
 import com.group.meal.dao.dataobject.GroupCompanyDO;
 import com.group.meal.dao.query.BaseQueryDO;
 import com.group.meal.result.PageResult;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface GroupCompanyDao {
     int deleteByPrimaryKey(Long id);
+
+    int deleteByIds(@Param("ids") List<Long> ids);
 
     /**
      * 插入一条记录（status默认为1，表示启用；isdel默认为0，表示未删除）

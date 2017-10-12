@@ -1,5 +1,6 @@
 package com.group.meal.controller.company;
 
+import com.google.common.collect.Lists;
 import com.group.meal.dao.dataobject.GroupCompanyDO;
 import com.group.meal.dao.query.BaseQueryDO;
 import com.group.meal.enums.MealResultCodeEnum;
@@ -12,6 +13,8 @@ import com.group.meal.vo.company.CompanyQueryVO;
 import com.group.meal.vo.company.CompanyResultVO;
 import com.group.meal.vo.company.CompanySaveVO;
 import com.group.meal.vo.company.CompanyUpdateVO;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -72,7 +76,7 @@ public class CompanyController {
 
     @ResponseBody
     @RequestMapping("/update")
-    public BaseResult update(@RequestParam CompanyUpdateVO updateVO) {
+    public BaseResult update(CompanyUpdateVO updateVO) {
         GroupCompanyDO companyDO = CompanyUtil.convert(updateVO);
         boolean success = companyService.update(companyDO);
         return success ? BaseResult.makeSuccess() : BaseResult.makeFail(MealResultCodeEnum.MEAL_SYSTEM_ERROR);
@@ -80,9 +84,12 @@ public class CompanyController {
 
     @ResponseBody
     @RequestMapping("/mulDelete")
-    public BaseResult mulDelete() {
-
-        return null;
+    public BaseResult mulDelete(@RequestParam("ids[]") Long[] ids) {
+        if (ArrayUtils.isEmpty(ids)) {
+            return BaseResult.makeFail(MealResultCodeEnum.MEAL_PARAM_ERROR).setMsg("没有选中要删除的记录");
+        }
+        int count = companyService.mulDelete(Lists.newArrayList(ids));
+        return BaseResult.makeSuccess(count).setMsg("成功删除了" + count + "条记录");
     }
 
 }

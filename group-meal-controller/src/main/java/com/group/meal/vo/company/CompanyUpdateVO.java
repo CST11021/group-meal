@@ -8,6 +8,8 @@ import java.util.Date;
  */
 public class CompanyUpdateVO {
 
+    private Long id;
+
     private Byte status;
 
     private String fullName;
@@ -29,6 +31,14 @@ public class CompanyUpdateVO {
     private String cooperationEndTime;
 
     public CompanyUpdateVO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Byte getStatus() {
@@ -114,7 +124,8 @@ public class CompanyUpdateVO {
     @Override
     public String toString() {
         return "CompanyUpdateVO{" +
-                "status=" + status +
+                "id=" + id +
+                ", status=" + status +
                 ", fullName='" + fullName + '\'' +
                 ", shortName='" + shortName + '\'' +
                 ", ownerCity='" + ownerCity + '\'' +
@@ -122,8 +133,8 @@ public class CompanyUpdateVO {
                 ", address='" + address + '\'' +
                 ", contactPerson='" + contactPerson + '\'' +
                 ", contactPhone='" + contactPhone + '\'' +
-                ", cooperationStartTime=" + cooperationStartTime +
-                ", cooperationEndTime=" + cooperationEndTime +
+                ", cooperationStartTime='" + cooperationStartTime + '\'' +
+                ", cooperationEndTime='" + cooperationEndTime + '\'' +
                 '}';
     }
 }

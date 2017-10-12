@@ -33,7 +33,6 @@ public class BaseResult<T> implements Serializable {
     public BaseResult(MealResultCodeEnum codeEnum) {
         this.success = false;
         this.code = codeEnum.getErrorCode();
-        this.msg = codeEnum.getErrorMsg();
     }
 
     public static BaseResult<Void> makeSuccess() {
@@ -62,31 +61,35 @@ public class BaseResult<T> implements Serializable {
         return data;
     }
 
-    public void setData(T data) {
+    public BaseResult<T> setData(T data) {
         this.data = data;
+        return this;
     }
 
     public String getMsg() {
         return msg;
     }
 
-    public void setMsg(String msg) {
+    public BaseResult<T> setMsg(String msg) {
         this.msg = msg;
+        return this;
     }
 
     public String getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public BaseResult<T> setCode(String code) {
         this.code = code;
+        return this;
     }
 
     public boolean isSuccess() {
         return success;
     }
 
-    public void setSuccess(boolean success) {
+    public BaseResult<T> setSuccess(boolean success) {
         this.success = success;
+        return this;
     }
 }

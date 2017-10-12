@@ -14,5 +14,5 @@ public interface CompanyService {
 
     boolean update(GroupCompanyDO groupCompanyDO);
 
-    boolean mulDelete(List<Long> ids);
+    int mulDelete(List<Long> ids);
 }

@@ -40,7 +40,8 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public boolean mulDelete(List<Long> ids) {
-        return false;
+    public int mulDelete(List<Long> ids) {
+        int count = groupCompanyDao.deleteByIds(ids);
+        return count;
     }
 }

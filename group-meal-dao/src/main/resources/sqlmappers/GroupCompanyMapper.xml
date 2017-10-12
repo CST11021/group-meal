@@ -139,6 +139,13 @@
     delete from group_company
     where id = #{id,jdbcType=BIGINT}
   </delete>
+    <delete id="deleteByIds">
+        delete from group_company
+        where id IN
+        <foreach collection="ids" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
     <insert id="insert" parameterType="com.group.meal.dao.dataobject.GroupCompanyDO">
       insert into group_company (
       gmt_create, gmt_modified,

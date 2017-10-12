@@ -1,6 +1,7 @@
 #set($title = "企业管理")
 #set($layout = "/layout/default.vm")
 
+##查询表单
 <form class="layui-form">
     <div class="layui-row">
         <div class="layui-col-md3">
@@ -47,11 +48,12 @@
         </div>
     </div>
 </form>
+##新增、查询、批量删除和导出
 <div class="layui-row">
     <button id="btn_id_addCompany" class="layui-btn" lay-filter="addCompany">新增</button>
     <button id="btn_id_queryCompany" class="layui-btn" lay-filter="queryCompany">查询</button>
-    <button id="btn_id_delete" class="layui-btn" lay-filter="deleteCompanys">批量删除</button>
-    <button id="btn_id_delete" class="layui-btn" lay-filter="deleteCompanys">导出</button>
+    <button id="btn_id_mulDelete" class="layui-btn" lay-filter="deleteCompanys">批量删除</button>
+    <button id="btn_id_export" class="layui-btn" lay-filter="deleteCompanys">导出</button>
 </div>
 <table id="companys_table" lay-filter="lf_companys_table"></table>
 <form id="form_id_saveCompany" class="layui-form" style="display: none;">
@@ -116,7 +118,9 @@
         </div>
     </div>
 </form>
-<form id="form_id_updateCompany" class="layui-form" action="/company/update" method="post" style="display: none;">
+<form id="form_id_updateCompany" class="layui-form" style="display: none;">
+    <input type="hidden" name="id">
+
     <div class="layui-form-item">
         <label class="layui-form-label" style="width: 100px;">公司全称</label>
         <div class="layui-input-block">
@@ -173,7 +177,7 @@
     </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit lay-filter="*">确认修改</button>
+            <button id="btn_id_update" lay-submit class="layui-btn" lay-filter="btn_lf_update">确认修改</button>
         </div>
     </div>
 </form>
@@ -267,36 +271,27 @@
         });
     });
 
-    // 添加公司表单提交
+    // 新增表单提交
     var form = layui.form;
     form.on('submit(btn_lf_save)', function(data){
-//        console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
-//        console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
-//        console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
-
         $.post('/company/save', data.field, function (res) {
             if (res.success) {
                 layer.msg("新增成功");
                 layer.close(addCompanyLayer);
-                table.reload('companyTable', {
-//                    where: {
-//                        area: $("#id_area").val()
-//                    }
-                });
+                $('#btn_id_queryCompany').click();
             } else {
                 layer.msg(res.msg);
             }
         }, 'json');
-
         return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
     });
 
     // 监听表格复选框选择
     var ids = new Array();
     table.on('checkbox(lf_companys_table)', function(obj){
-//        console.log(obj.checked); //当前是否选中状态
-//        console.log(obj.data); //选中行的相关数据
-//        console.log(obj.type); //如果触发的是全选，则为：all，如果触发的是单选，则为：one
+        //console.log(obj.checked); //当前是否选中状态
+        // console.log(obj.data); //选中行的相关数据
+        // console.log(obj.type); //如果触发的是全选，则为：all，如果触发的是单选，则为：one
         if (obj.type == "one") {
             var id = obj.data.id;
             if (obj.checked) {
@@ -316,25 +311,48 @@
                 ids = [];
             }
         }
-//        console.log(ids);
     });
 
+    // 批量删除绑定
+    $('#btn_id_mulDelete').on('click', function(){
+        if (ids.length == 0) {
+            layer.msg("请选择要删除的记录", {icon: 7});
+            return;
+        }
+
+        layer.confirm('确定删除吗?', {icon: 3, title:'提示'
+            }, function(index){
+                mulDelete(ids);
+                layer.close(index);
+            });
+    });
+    function mulDelete (ids) {
+        $.post("/company/mulDelete", {"ids":ids}, function(res) {
+            if (res.success) {
+                layer.msg(res.msg, {icon: 1});
+                $('#btn_id_queryCompany').click();
+            } else {
+                layer.msg(res.msg, {icon: 2});
+            }
+        });
+    }
+
     // 监听查看、编辑和删除
+    var updateCompanyLayer;// 表示编辑弹出层
+    var curRowObj;// 表示操作的行对象
     table.on('tool(lf_companys_table)', function(obj){
+        curRowObj = obj;
         var data = obj.data;
         if(obj.event === 'detail'){
             layer.msg('ID：'+ data.id + ' 的查看操作');
         } else if(obj.event === 'del'){
             layer.confirm('真的删除行么', function(index){
-                obj.del();
+                mulDelete([data.id]);
                 layer.close(index);
             });
         } else if(obj.event === 'edit'){
-//            layer.alert('编辑行：<br>'+ JSON.stringify(data));
-//            obj.update({
-//                id: 123
-//            });
-
+            debugger;
+            $('#form_id_updateCompany').find("[name='id']").val(data.id);
             $('#form_id_updateCompany').find("[name='fullName']").val(data.fullName);
             $('#form_id_updateCompany').find("[name='shortName']").val(data.shortName);
             $('#form_id_updateCompany').find("[name='ownerCity']").val(data.ownerCity);
@@ -344,7 +362,7 @@
             $('#form_id_updateCompany').find("[name='contactPhone']").val(data.contactPhone);
             $('#form_id_updateCompany').find("[name='cooperationStartTime']").val(data.cooperationStartTime);
             $('#form_id_updateCompany').find("[name='cooperationEndTime']").val(data.cooperationEndTime);
-            layer.open({
+            updateCompanyLayer = layer.open({
                 type: 1
                 ,content: $('#form_id_updateCompany')
                 ,area: ['500px', '620px']
@@ -354,9 +372,39 @@
             });
         }
     });
+
+    $("#btn_id_update").on("click", function(){
+        form.on('submit(btn_lf_update)', function(data){
+            $.post('/company/update', data.field, function (res) {
+                if (res.success) {
+                    layer.msg("修改成功");
+                    layer.close(updateCompanyLayer);
+                    table.reload('companyTable', {});
+                    curRowObj.update({
+                        id: data.field.id
+                        ,gmtCreate: data.field.gmtCreate
+                        ,gmtModified: data.field.gmtModified
+                        ,status: data.field.status
+                        ,fullName: data.field.fullName
+                        ,shortName: data.field.shortName
+                        ,ownerCity: data.field.ownerCity
+                        ,area: data.field.area
+                        ,address: data.field.address
+                        ,contactPerson: data.field.contactPerson
+                        ,contactPhone: data.field.contactPhone
+                        ,cooperationStartTime: data.field.cooperationStartTime
+                        ,cooperationEndTime: data.field.cooperationEndTime
+                    });
+                } else {
+                    layer.msg(res.msg);
+                }
+            }, 'json');
+            return false;
+        });
+    })
+
 </script>
 <script type="text/babel"></script>
-
 
 <script id="demo" type="text/html">
     <h3>{{ d.title }}</h3>
