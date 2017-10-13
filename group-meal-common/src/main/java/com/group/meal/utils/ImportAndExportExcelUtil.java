@@ -145,25 +145,23 @@ public class ImportAndExportExcelUtil {
      * @param path 服务器上的文件路径（路径 + 文件名 + 后缀）
      * @param response
      */
-    public static void downloadFromService(String path, HttpServletResponse response) {
-        try {
-            File file = new File(path);
-            String fileName = file.getName();
-            InputStream fis = new BufferedInputStream(new FileInputStream(path));
-            byte[] buffer = new byte[fis.available()];
-            fis.read(buffer);
-            fis.close();
-            response.reset();
-            response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
-            response.addHeader("Content-Length", "" + file.length());
-            OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
-            response.setContentType("application/vnd.ms-excel;charset=UTF-8");
-            toClient.write(buffer);
-            toClient.flush();
-            toClient.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    public static void downloadFromService(String path, HttpServletResponse response) throws IOException{
+        File file = new File(path);
+        String fileName = file.getName();
+        InputStream fis = new BufferedInputStream(new FileInputStream(path));
+        byte[] buffer = new byte[fis.available()];
+        fis.read(buffer);
+        fis.close();
+
+        response.reset();
+        response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+        response.addHeader("Content-Length", "" + file.length());
+        response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+        OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+        toClient.write(buffer);
+        toClient.flush();
+        toClient.close();
+        file.delete();
     }
 
     /**
