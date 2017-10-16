@@ -107,9 +107,13 @@ public class CompanyController {
 
         String filePath = ImportAndExportExcelUtil.createSaveExcelFolder(request, TEMP_SAVE_EXCEL_FOLDER_NAME)
                 + FILE_SEPARATOR + System.currentTimeMillis() + EXCEL_SUFFIX_XLSX;
-        boolean flag = ImportAndExportExcelUtil.createExcelFile(headFields, records, sheetName, filePath);
-        if (flag) {
-            ImportAndExportExcelUtil.downloadFromService(filePath, response);
+        boolean success = ImportAndExportExcelUtil.createExcelFile(headFields, records, sheetName, filePath);
+        if (success) {
+            try {
+                ImportAndExportExcelUtil.downloadFromService(filePath, response);
+            } catch (Exception e) {
+                logger.error("ImportAndExportExcelUtil.downloadFromService is error", e);
+            }
         }
     }
 }
