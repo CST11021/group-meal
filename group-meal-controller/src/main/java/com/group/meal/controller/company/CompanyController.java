@@ -111,7 +111,5 @@ public class CompanyController {
         if (flag) {
             ImportAndExportExcelUtil.downloadFromService(filePath, response);
         }
-//        return flag? BaseResult.makeSuccess("导出成功") :
-//                BaseResult.makeFail(MealResultCodeEnum.MEAL_PARAM_ERROR).setMsg("导出失败");
     }
 }

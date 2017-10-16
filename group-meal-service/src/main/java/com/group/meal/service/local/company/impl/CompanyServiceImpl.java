@@ -41,12 +41,12 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public int mulDelete(List<Long> ids) {
-        int count = groupCompanyDao.deleteByIds(ids);
+        int count = groupCompanyDao.updateIsDelByIds(ids);
         return count;
     }
 
     @Override
     public List<GroupCompanyDO> queryAllByCondition(GroupCompanyDO condition) {
-        return groupCompanyDao.selectAllByCondition(condition);
+        return groupCompanyDao.selectByCondition(new BaseQueryDO(condition));
     }
 }

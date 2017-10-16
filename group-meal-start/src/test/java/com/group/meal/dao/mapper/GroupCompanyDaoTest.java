@@ -59,7 +59,21 @@ public class GroupCompanyDaoTest extends ApplicationTests {
 
     @Test
     public void updateByPrimaryKeySelective() {
-
+        GroupCompanyDO companyDO = new GroupCompanyDO();
+        companyDO.setId(11L);
+        companyDO.setArea("area11");
+        companyDO.setOwnerCity("ownerCity11");
+        companyDO.setAddress("address11");
+        companyDO.setContactPerson("contactPerson11");
+        companyDO.setContactPhone("contactPhone11");
+        companyDO.setFullName("fullName11");
+        companyDO.setShortName("shortName11");
+        companyDO.setCooperationEndTime(new Date());
+        companyDO.setCooperationStartTime(new Date());
+        companyDO.setIsDel((byte) 1);
+        companyDO.setStatus((byte) 0);
+        int count = groupCompanyDao.updateByPrimaryKeySelective(companyDO);
+        Assert.assertEquals(1, count);
     }
 
     @Test

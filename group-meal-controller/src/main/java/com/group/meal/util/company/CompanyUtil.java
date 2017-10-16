@@ -78,6 +78,7 @@ public class CompanyUtil {
             return null;
         }
         GroupCompanyDO groupCompanyDO = convertToDO(companyQueryVO);
+        groupCompanyDO.setIsDel((byte) 0);
         BaseQueryDO<GroupCompanyDO> baseQueryDO = new BaseQueryDO(
                 groupCompanyDO, companyQueryVO.getCurrentPage(), companyQueryVO.getPageSize());
 
@@ -90,6 +91,7 @@ public class CompanyUtil {
         groupCompanyDO.setFullName(StringUtils.trimToNull(companyQueryVO.getFullName()));
         groupCompanyDO.setOwnerCity(StringUtils.trimToNull(companyQueryVO.getOwnerCity()));
         groupCompanyDO.setStatus(companyQueryVO.getStatus());
+        groupCompanyDO.setIsDel((byte) 0);
         return groupCompanyDO;
     }
 

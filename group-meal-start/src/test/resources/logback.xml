@@ -27,7 +27,6 @@
         </encoder>
     </appender>
 
-    <!--<logger name="org.apache.ibatis" level="DEBUG" />-->
     <root level="info">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="APPLICATION"/>

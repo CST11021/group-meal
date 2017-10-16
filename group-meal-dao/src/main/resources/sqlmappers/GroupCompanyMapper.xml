@@ -82,7 +82,7 @@
         <if test="orderBy != null">
             order by #{orderBy}
         </if>
-        <if test="currentPage != null and pageSize != null">
+        <if test="currentPage > 0 and pageSize > 0">
             limit #{startRow}, #{pageSize}
         </if>
     </select>
@@ -136,58 +136,6 @@
             </where>
         </trim>
     </select>
-    <select id="selectAllByCondition" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from group_company
-        <trim suffixOverrides="and">
-            <where>
-                <if test="id != null">
-                    id = #{id,jdbcType=BIGINT}
-                </if>
-                <if test="gmtCreate != null">
-                    gmt_create = #{gmtCreate,jdbcType=TIMESTAMP} and
-                </if>
-                <if test="gmtModified != null">
-                    gmt_modified = #{gmtModified,jdbcType=TIMESTAMP} and
-                </if>
-                <if test="status != null">
-                    status = #{status,jdbcType=TINYINT} and
-                </if>
-                <if test="fullName != null">
-                    full_name = #{fullName,jdbcType=VARCHAR} and
-                </if>
-                <if test="shortName != null">
-                    short_name = #{shortName,jdbcType=VARCHAR} and
-                </if>
-                <if test="ownerCity != null">
-                    owner_city = #{ownerCity,jdbcType=VARCHAR} and
-                </if>
-                <if test="area != null">
-                    area = #{area,jdbcType=VARCHAR} and
-                </if>
-                <if test="address != null">
-                    address = #{address,jdbcType=VARCHAR} and
-                </if>
-                <if test="contactPerson != null">
-                    contact_person = #{contactPerson,jdbcType=VARCHAR} and
-                </if>
-                <if test="contactPhone != null">
-                    contact_phone = #{contactPhone,jdbcType=VARCHAR} and
-                </if>
-                <if test="cooperationStartTime != null">
-                    cooperation_start_time = #{cooperationStartTime,jdbcType=TIMESTAMP} and
-                </if>
-                <if test="cooperationEndTime != null">
-                    cooperation_end_time = #{cooperationEndTime,jdbcType=TIMESTAMP} and
-                </if>
-                <if test="isDel != null">
-                    is_del = #{isDel,jdbcType=TINYINT} and
-                </if>
-            </where>
-        </trim>
-        order by gmt_create desc
-    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from group_company
         where id = #{id,jdbcType=BIGINT}
@@ -215,12 +163,7 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.group.meal.dao.dataobject.GroupCompanyDO">
         update group_company
         <set>
-            <if test="gmtCreate != null">
-                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="gmtModified != null">
-                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-            </if>
+            gmt_modified = now(),
             <if test="status != null">
                 status = #{status,jdbcType=TINYINT},
             </if>
@@ -259,8 +202,7 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.group.meal.dao.dataobject.GroupCompanyDO">
     update group_company
-    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+    set gmt_modified = now(),
       status = #{status,jdbcType=TINYINT},
       full_name = #{fullName,jdbcType=VARCHAR},
       short_name = #{shortName,jdbcType=VARCHAR},
@@ -274,4 +216,12 @@
       is_del = #{isDel,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+    <update id="updateIsDelByIds">
+        update group_company
+        set is_del = 1 , gmt_modified = now()
+        where id IN
+        <foreach collection="ids" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
 </mapper>

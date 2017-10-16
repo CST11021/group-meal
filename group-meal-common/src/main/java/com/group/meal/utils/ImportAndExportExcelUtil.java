@@ -54,23 +54,24 @@ public class ImportAndExportExcelUtil {
 
         try {
             OutputStream os = new FileOutputStream(filepath);
-            // 创建一个工作簿，然后根据 title 创建一个页签
             XSSFWorkbook workbook = new XSSFWorkbook();
             XSSFSheet sheet = workbook.createSheet(sheetName);
             XSSFRow row = sheet.createRow(0);
 
             int cell = 0;
-            for (String columName : headFields) {
-                row.createCell(cell).setCellValue(columName);
+            for (String columnName : headFields) {
+                row.createCell(cell).setCellValue(columnName);
+                sheet.setColumnWidth(cell, columnName.getBytes().length*256);// 仅适用中文
                 cell++;
             }
 
             int rw = 1;
             for (Map<String, String> record : records) {
-                XSSFRow xrow = sheet.createRow(rw);
+                XSSFRow xRow = sheet.createRow(rw);
                 cell = 0;
-                for (String columName : headFields) {
-                    xrow.createCell(cell).setCellValue(record.get(columName));
+                for (String columnName : headFields) {
+                    xRow.createCell(cell).setCellValue(record.get(columnName));
+                    sheet.autoSizeColumn(cell);// 不适用中文
                     cell++;
                 }
                 rw++;
@@ -107,22 +108,24 @@ public class ImportAndExportExcelUtil {
                 XSSFRow row = sheet.createRow(0);
 
                 int cell = 0;
-                for (String columName : sheetHeadFields.get(sheetIndex)) {
+                for (String columnName : sheetHeadFields.get(sheetIndex)) {
                     Cell tempCell = row.createCell(cell);
                     tempCell.setCellType(CellType.STRING);
-                    tempCell.setCellValue(columName);
+                    tempCell.setCellValue(columnName);
+                    sheet.setColumnWidth(cell, columnName.getBytes().length*256);// 仅适用中文
                     cell++;
                 }
 
                 int rw = 1;
                 if(sheetRecords != null) {
                     for (Map<String, String> record : sheetRecords.get(sheetIndex)) {
-                        XSSFRow xrow = sheet.createRow(rw);
+                        XSSFRow xRow = sheet.createRow(rw);
                         cell = 0;
-                        for (String columName : sheetHeadFields.get(sheetIndex)){
-                            Cell tempCell = xrow.createCell(cell);
+                        for (String columnName : sheetHeadFields.get(sheetIndex)){
+                            Cell tempCell = xRow.createCell(cell);
                             tempCell.setCellType(CellType.STRING);
-                            tempCell.setCellValue(record.get(columName));
+                            tempCell.setCellValue(record.get(columnName));
+                            sheet.autoSizeColumn(cell);// 不适用中文
                             cell++;
                         }
                         rw++;
@@ -317,7 +320,7 @@ public class ImportAndExportExcelUtil {
         List<String> titles = Lists.newArrayList(new String[]{"11111", "22222"});
         List<List<String>> headFields = Lists.newArrayList();
         headFields.add(Lists.newArrayList(new String[]{"序号","姓名"}));
-        headFields.add(Lists.newArrayList(new String[]{"ID"}));
+        headFields.add(Lists.newArrayList(new String[]{"ID11111111"}));
 
         List<List<Map<String,String>>> records = Lists.newArrayList();
         List<Map<String,String>> record1 = Lists.newArrayList();
@@ -329,7 +332,7 @@ public class ImportAndExportExcelUtil {
 
         List<Map<String,String>> record2 = Lists.newArrayList();
         Map<String, String> recordMap2 = new HashMap<>();
-        recordMap2.put("ID","1");
+        recordMap2.put("ID11111111","111111111111111111111111111111");
         record2.add(recordMap2);
         records.add(record2);
 
