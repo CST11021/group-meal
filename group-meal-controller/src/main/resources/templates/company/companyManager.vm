@@ -433,35 +433,3 @@
     })
 </script>
 <script type="text/babel"></script>
-
-##测试使用模板引擎
-<script id="demo" type="text/html">
-    <h3>{{ d.title }}</h3>
-    <ul>
-        {{# layui.each(d.list, function(index, item){ }}
-        <li>
-            <span>{{ item.modname }}</span>
-            <span>{{ item.alias }}：</span>
-            <span>{{ item.site || '' }}</span>
-        </li>
-        {{# }); }}
-        {{# if(d.list.length === 0){ }}
-        无数据
-        {{# } }}
-    </ul>
-</script>
-<script>
-    var laytpl = layui.laytpl;
-    var data = { //数据
-        "title": "Layui常用模块"
-        , "list": [
-            {"modname": "弹层", "alias": "layer", "site": "layer.layui.com"},
-            {"modname": "表单", "alias": "form"}
-        ]
-    }
-    var getTpl = document.getElementById('demo').innerHTML
-    laytpl(getTpl).render(data, function (html) {
-//        $('#test').html(html);
-    });
-
-</script>

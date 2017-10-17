@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2017-10-11 21:20:58
+Date: 2017-10-17 14:34:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,13 +37,13 @@ CREATE TABLE `group_company` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_unique` (`full_name`,`contact_phone`),
   KEY `idx_select` (`status`,`full_name`,`contact_phone`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='企业公司表';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='企业公司表';
 
 -- ----------------------------
 -- Records of group_company
 -- ----------------------------
 INSERT INTO `group_company` VALUES ('1', '2017-09-25 19:23:57', '2017-09-25 19:23:57', '1', 'fullName', 'sortName', 'ownerCity', 'area', 'address', 'contactPerson', 'contactPhone', '2017-09-25 19:23:56', '2017-09-25 19:23:56', '0');
-INSERT INTO `group_company` VALUES ('2', '2017-10-11 18:02:25', '2017-10-11 18:02:25', '1', '1', '1', '1', '1', '1', '1', '1', '2017-10-11 00:00:00', '2017-10-28 18:02:05', '0');
+INSERT INTO `group_company` VALUES ('2', '2017-10-11 18:02:25', '2017-10-11 18:02:25', '1', '2', '1', '1', '1', '1', '1', '1', '2017-10-11 00:00:00', '2017-10-28 18:02:05', '0');
 INSERT INTO `group_company` VALUES ('3', '2017-10-11 20:28:10', '2017-10-11 20:28:10', '1', '2', '2', '2', '2', '2', '2', '2', '2017-10-11 00:00:00', '2017-10-31 00:00:00', '0');
 INSERT INTO `group_company` VALUES ('4', '2017-10-11 20:32:10', '2017-10-11 20:32:10', '1', '3', '3', '3', '3', '3', '3', '3', '2017-10-19 00:00:00', '2017-10-30 00:00:00', '0');
 INSERT INTO `group_company` VALUES ('5', '2017-10-11 20:48:55', '2017-10-11 20:48:55', '1', '4', '4', '4', '4', '4', '4', '4', '2017-10-26 00:00:00', '2017-10-25 00:00:00', '0');
@@ -51,8 +51,8 @@ INSERT INTO `group_company` VALUES ('6', '2017-10-11 20:54:54', '2017-10-11 20:5
 INSERT INTO `group_company` VALUES ('7', '2017-10-11 21:10:26', '2017-10-11 21:10:26', '1', '6', '6', '6', '6', '6', '6', '6', '2017-10-05 00:00:00', '2017-10-11 21:10:22', '0');
 INSERT INTO `group_company` VALUES ('8', '2017-10-11 21:11:02', '2017-10-11 21:11:02', '1', '8', '8', '8', '8', '8', '8', '8', '2017-10-01 00:00:00', '2017-10-11 21:11:01', '0');
 INSERT INTO `group_company` VALUES ('9', '2017-10-11 21:12:44', '2017-10-11 21:12:44', '1', '9', '9', '9', '9', '9', '9', '9', '2017-10-02 00:00:00', '2017-10-11 21:12:43', '0');
-INSERT INTO `group_company` VALUES ('10', '2017-10-11 21:14:41', '2017-10-11 21:14:41', '1', '10', '10', '10', '10', '10', '10', '10', '2017-10-05 00:00:00', '2017-10-31 00:00:00', '0');
 INSERT INTO `group_company` VALUES ('11', '2017-10-11 21:14:55', '2017-10-11 21:14:55', '1', '11', '11', '11', '11', '11', '11', '11', '2017-10-17 00:00:00', '2017-10-24 00:00:00', '0');
+INSERT INTO `group_company` VALUES ('12', '2017-10-16 15:09:29', '2017-10-16 15:09:29', '1', '12', '12', '12', '12', '12', '12', '12', '2017-10-16 00:00:00', '2017-10-16 00:00:00', '0');
 
 -- ----------------------------
 -- Table structure for `group_company_item_rel`
@@ -132,6 +132,7 @@ CREATE TABLE `group_item_category` (
   `gmt_create` datetime NOT NULL COMMENT '创建时间',
   `gmt_modified` datetime NOT NULL COMMENT '修改时间',
   `category_name` varchar(100) NOT NULL COMMENT '类目名称',
+  `parent_id` bigint(20) NOT NULL,
   `status` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '状态（1=正常，0=停用）',
   `is_del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否删除（1=删除，0=未删除）',
   PRIMARY KEY (`id`),

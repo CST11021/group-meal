@@ -1,14 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>菜品管理</title>
-    <link rel="stylesheet" href="/static/layui/css/layui.css">
-</head>
-<body>
+#set($title = "菜品管理")
+#set($layout = "/layout/default.vm")
 
-<h1>菜品管理</h1>
+<input id="demo" type="text" name="" autocomplete="off" class="layui-input">
+##<div id="demo"></div>
 
-</body>
-</html>
+<script src="/static/layui/layui.all.js"></script>
+<script src="/static/js/common.js"></script>
+<script>
+    layui.tree({
+        elem: '#demo' //传入元素选择器
+        ,nodes: [
+            {//节点
+                name: '父节点1'
+                ,children: [{
+                    name: '子节点11'
+                },{
+                    name: '子节点12'
+                }]
+            },{
+                name: '父节点2（可以点左侧箭头，也可以双击标题）'
+                ,children: [{
+                    name: '子节点21'
+                    ,children: [{
+                        name: '子节点211'
+                    }]
+                }]
+            }]
+        ,click: function(node){
+            console.log(node) //node即为当前点击的节点数据
+        }
+        ,dbclick:function(node) {
+            debugger
+        }
+    });
+</script>
