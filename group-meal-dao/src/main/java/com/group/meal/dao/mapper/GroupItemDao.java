@@ -2,6 +2,7 @@ package com.group.meal.dao.mapper;
 
 
 import com.group.meal.dao.dataobject.GroupItemDO;
+import com.group.meal.dao.query.BaseQueryDO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -26,13 +27,9 @@ public interface GroupItemDao {
 
     GroupItemDO selectByPrimaryKey(Long id);
 
-    List<GroupItemDO> selectByCondition(@Param("categoryIds") Long[] categoryIds,
-                                            @Param("skuName") String skuName,
-                                            @Param("status") Byte status);
+    List<GroupItemDO> selectByCondition(BaseQueryDO<GroupItemDO> param);
 
-    long countByCondition(@Param("categoryIds") Long[] categoryIds,
-                          @Param("skuName") String skuName,
-                          @Param("status") Byte status);
+    long countByCondition(BaseQueryDO<GroupItemDO> param);
 
     int updateByPrimaryKeySelective(GroupItemDO record);
 

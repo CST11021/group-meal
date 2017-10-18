@@ -3,6 +3,8 @@ package com.group.meal.dao.mapper;
 import com.google.common.collect.Lists;
 import com.group.meal.ApplicationTests;
 import com.group.meal.dao.dataobject.GroupItemDO;
+import com.group.meal.dao.model.item.QueryItemModel;
+import com.group.meal.dao.query.BaseQueryDO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,22 +51,46 @@ public class GroupItemDaoTest extends ApplicationTests {
 
     @Test
     public void selectByCondition() throws Exception {
-//        List<GroupItemDO> itemDOList = itemDao.selectByCondition()
+        QueryItemModel queryItemModel = new QueryItemModel();
+        queryItemModel.setSkuName("1");
+        queryItemModel.setCategoryIds(Lists.newArrayList(new Long[]{1L, 2L}));
+        queryItemModel.setStatus((byte) 1);
+        List<GroupItemDO> itemDOList = itemDao.selectByCondition(new BaseQueryDO(queryItemModel));
+        Assert.assertNotEquals(0, itemDOList.size());
     }
 
     @Test
     public void countByCondition() throws Exception {
-
+        QueryItemModel queryItemModel = new QueryItemModel();
+        queryItemModel.setSkuName("1");
+        queryItemModel.setCategoryIds(Lists.newArrayList(new Long[]{1L, 2L}));
+        queryItemModel.setStatus((byte) 1);
+        long count = itemDao.countByCondition(new BaseQueryDO(queryItemModel));
+        Assert.assertNotEquals(0, count);
     }
 
     @Test
     public void updateByPrimaryKeySelective() throws Exception {
-
+        GroupItemDO itemDO = new GroupItemDO();
+        itemDO.setId(1L);
+        itemDO.setStatus((byte) 0);
+        int count = itemDao.updateByPrimaryKeySelective(itemDO);
+        Assert.assertEquals(1, count);
     }
 
     @Test
     public void updateByPrimaryKey() throws Exception {
-
+        GroupItemDO itemDO = new GroupItemDO();
+        itemDO.setId(1L);
+        itemDO.setSkuName("2");
+        itemDO.setPicturePath("");
+        itemDO.setCategoryId(2L);
+        itemDO.setSkuCode("2");
+        itemDO.setIsDel((byte) 1);
+        itemDO.setStatus((byte) 1);
+        itemDO.setPrice(new BigDecimal(200));
+        int count = itemDao.updateByPrimaryKey(itemDO);
+        Assert.assertEquals(1, count);
     }
 
 }

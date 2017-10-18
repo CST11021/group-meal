@@ -2,6 +2,7 @@ package com.group.meal.service.local.company.impl;
 
 import com.group.meal.dao.dataobject.GroupCompanyDO;
 import com.group.meal.dao.mapper.GroupCompanyDao;
+import com.group.meal.dao.model.item.QueryItemModel;
 import com.group.meal.dao.query.BaseQueryDO;
 import com.group.meal.result.PageResult;
 import com.group.meal.service.local.company.CompanyService;

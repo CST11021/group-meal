@@ -40,8 +40,8 @@ public class CompanyUtil {
         companyDO.setOwnerCity(saveVO.getOwnerCity());
         companyDO.setContactPerson(saveVO.getContactPerson());
         companyDO.setContactPhone(saveVO.getContactPhone());
-        companyDO.setCooperationStartTime(DateUtil.parse(saveVO.getCooperationStartTime(), DEFAULT_DATE_FORMAT));
-        companyDO.setCooperationEndTime(DateUtil.parse(saveVO.getCooperationEndTime(), DEFAULT_DATE_FORMAT));
+        companyDO.setCooperationStartTime(DateUtil.parse(saveVO.getCooperationStartTime(), DateUtil.DEFAULT_PATTERN));
+        companyDO.setCooperationEndTime(DateUtil.parse(saveVO.getCooperationEndTime(), DateUtil.DEFAULT_PATTERN));
         return companyDO;
     }
 
@@ -55,8 +55,8 @@ public class CompanyUtil {
 
             CompanyResultVO companyResultVO = new CompanyResultVO();
             companyResultVO.setId(groupCompanyDO.getId());
-            companyResultVO.setGmtCreate(DateUtil.format(groupCompanyDO.getGmtCreate(), DEFAULT_DATE_FORMAT));
-            companyResultVO.setGmtModified(DateUtil.format(groupCompanyDO.getGmtModified(), DEFAULT_DATE_FORMAT));
+            companyResultVO.setGmtCreate(DateUtil.format(groupCompanyDO.getGmtCreate(), DateUtil.DEFAULT_PATTERN));
+            companyResultVO.setGmtModified(DateUtil.format(groupCompanyDO.getGmtModified(), DateUtil.DEFAULT_PATTERN));
             companyResultVO.setStatus(groupCompanyDO.getStatus());
             companyResultVO.setFullName(groupCompanyDO.getFullName());
             companyResultVO.setShortName(groupCompanyDO.getShortName());
@@ -65,7 +65,7 @@ public class CompanyUtil {
             companyResultVO.setAddress(groupCompanyDO.getAddress());
             companyResultVO.setContactPerson(groupCompanyDO.getContactPerson());
             companyResultVO.setContactPhone(groupCompanyDO.getContactPhone());
-            companyResultVO.setCooperationStartTime(DateUtil.format(groupCompanyDO.getCooperationStartTime(), DEFAULT_DATE_FORMAT));
+            companyResultVO.setCooperationStartTime(DateUtil.format(groupCompanyDO.getCooperationStartTime(), DateUtil.DEFAULT_PATTERN));
             companyResultVO.setCooperationEndTime(DateUtil.format(groupCompanyDO.getCooperationEndTime(), DEFAULT_DATE_FORMAT));
             companyResultVO.setIsDel(groupCompanyDO.getIsDel());
             resultVOList.add(companyResultVO);
@@ -101,8 +101,8 @@ public class CompanyUtil {
         companyDOList.stream().forEach(groupCompanyDO -> {
             Map<String, String> record = new HashMap<String, String>();
             record.put("ID", groupCompanyDO.getId().toString());
-            record.put("创建时间", DateUtil.format(groupCompanyDO.getGmtCreate(), DEFAULT_DATE_FORMAT));
-            record.put("修改时间", DateUtil.format(groupCompanyDO.getGmtModified(), DEFAULT_DATE_FORMAT));
+            record.put("创建时间", DateUtil.format(groupCompanyDO.getGmtCreate(), DateUtil.DEFAULT_PATTERN));
+            record.put("修改时间", DateUtil.format(groupCompanyDO.getGmtModified(), DateUtil.DEFAULT_PATTERN));
             record.put("公司全称", groupCompanyDO.getFullName());
             record.put("公司简称", groupCompanyDO.getShortName());
             record.put("所属城市", groupCompanyDO.getOwnerCity());

@@ -1,6 +1,7 @@
 package com.group.meal.dao.mapper;
 
 import com.group.meal.dao.dataobject.GroupCompanyDO;
+import com.group.meal.dao.model.item.QueryItemModel;
 import com.group.meal.dao.query.BaseQueryDO;
 import org.apache.ibatis.annotations.Param;
 

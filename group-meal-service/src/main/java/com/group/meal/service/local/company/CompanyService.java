@@ -30,7 +30,7 @@ public interface CompanyService {
     boolean save(GroupCompanyDO groupCompanyDO);
 
     /**
-     * 更新 GroupCompanyDO （仅更新非空字段）
+     * 更新 GroupCompanyDO （仅）
      * @param groupCompanyDO
      * @return
      */
