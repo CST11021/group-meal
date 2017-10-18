@@ -16,6 +16,9 @@ public class GroupRoleDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public GroupRoleDO() {
+    }
+
     public GroupRoleDO(Long id, Date gmtCreate, Date gmtModified, String roleName, Byte status) {
         this.id = id;
         this.gmtCreate = gmtCreate;
@@ -28,20 +31,40 @@ public class GroupRoleDO implements Serializable {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Date getGmtCreate() {
         return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
     }
 
     public Date getGmtModified() {
         return gmtModified;
     }
 
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
+    }
+
     public String getRoleName() {
         return roleName;
     }
 
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
     public Byte getStatus() {
         return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 
     @Override

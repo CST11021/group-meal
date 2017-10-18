@@ -22,6 +22,9 @@ public class GroupUserDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public GroupUserDO() {
+    }
+
     public GroupUserDO(Long id, Date gmtCreate, Date gmtModified, String userNickname, String phone, Byte status, String warehouseCode, String password) {
         this.id = id;
         this.gmtCreate = gmtCreate;
@@ -37,32 +40,64 @@ public class GroupUserDO implements Serializable {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Date getGmtCreate() {
         return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
     }
 
     public Date getGmtModified() {
         return gmtModified;
     }
 
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
+    }
+
     public String getUserNickname() {
         return userNickname;
+    }
+
+    public void setUserNickname(String userNickname) {
+        this.userNickname = userNickname;
     }
 
     public String getPhone() {
         return phone;
     }
 
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public Byte getStatus() {
         return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 
     public String getWarehouseCode() {
         return warehouseCode;
     }
 
+    public void setWarehouseCode(String warehouseCode) {
+        this.warehouseCode = warehouseCode;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

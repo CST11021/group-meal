@@ -358,7 +358,7 @@
     // 导出Excel绑定
     $('#btn_id_export').on('click', function () {
         var frame = document.getElementById("form_id_query");
-        frame.action = '/company/exportCompanys';
+        frame.action = '/company/exportCompany';
         frame.submit();
     });
 

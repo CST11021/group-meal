@@ -7,12 +7,13 @@
             <arg column="gmt_create" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
             <arg column="gmt_modified" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
             <arg column="category_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="parent_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
             <arg column="status" javaType="java.lang.Byte" jdbcType="TINYINT"/>
             <arg column="is_del" javaType="java.lang.Byte" jdbcType="TINYINT"/>
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        id, gmt_create, gmt_modified, category_name, status, is_del
+        id, gmt_create, gmt_modified, category_name, parent_id, status, is_del
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
@@ -26,7 +27,7 @@
     </delete>
     <insert id="insert" parameterType="com.group.meal.dao.dataobject.GroupItemCategoryDO">
         insert into group_item_category (id, gmt_create, gmt_modified,
-        category_name, status, is_del
+        category_name, parent_id, status, is_del
         )
         values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
         #{categoryName,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{isDel,jdbcType=TINYINT}
@@ -46,6 +47,9 @@
             </if>
             <if test="categoryName != null">
                 category_name,
+            </if>
+            <if test="parentId != null">
+                parent_id,
             </if>
             <if test="status != null">
                 status,
@@ -67,6 +71,9 @@
             <if test="categoryName != null">
                 #{categoryName,jdbcType=VARCHAR},
             </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=VARCHAR},
+            </if>
             <if test="status != null">
                 #{status,jdbcType=TINYINT},
             </if>
@@ -87,6 +94,9 @@
             <if test="categoryName != null">
                 category_name = #{categoryName,jdbcType=VARCHAR},
             </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=BIGINT},
+            </if>
             <if test="status != null">
                 status = #{status,jdbcType=TINYINT},
             </if>
@@ -101,6 +111,7 @@
         set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
         gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
         category_name = #{categoryName,jdbcType=VARCHAR},
+        parent_id = #{parentId,jdbcType=BIGINT},
         status = #{status,jdbcType=TINYINT},
         is_del = #{isDel,jdbcType=TINYINT}
         where id = #{id,jdbcType=BIGINT}

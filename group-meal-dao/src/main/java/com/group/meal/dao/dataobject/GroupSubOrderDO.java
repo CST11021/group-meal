@@ -31,6 +31,9 @@ public class GroupSubOrderDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public GroupSubOrderDO() {
+    }
+
     public GroupSubOrderDO(Long id, Date gmtCreate, Date gmtModified, String mainOrderCode, String skuName, String skuCode, BigDecimal saleAmount, String saleUnit, BigDecimal price, Byte status, String warehouseCode, String subOrderCode) {
         this.id = id;
         this.gmtCreate = gmtCreate;
@@ -50,48 +53,96 @@ public class GroupSubOrderDO implements Serializable {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Date getGmtCreate() {
         return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
     }
 
     public Date getGmtModified() {
         return gmtModified;
     }
 
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
+    }
+
     public String getMainOrderCode() {
         return mainOrderCode;
+    }
+
+    public void setMainOrderCode(String mainOrderCode) {
+        this.mainOrderCode = mainOrderCode;
     }
 
     public String getSkuName() {
         return skuName;
     }
 
+    public void setSkuName(String skuName) {
+        this.skuName = skuName;
+    }
+
     public String getSkuCode() {
         return skuCode;
+    }
+
+    public void setSkuCode(String skuCode) {
+        this.skuCode = skuCode;
     }
 
     public BigDecimal getSaleAmount() {
         return saleAmount;
     }
 
+    public void setSaleAmount(BigDecimal saleAmount) {
+        this.saleAmount = saleAmount;
+    }
+
     public String getSaleUnit() {
         return saleUnit;
+    }
+
+    public void setSaleUnit(String saleUnit) {
+        this.saleUnit = saleUnit;
     }
 
     public BigDecimal getPrice() {
         return price;
     }
 
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
     public Byte getStatus() {
         return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 
     public String getWarehouseCode() {
         return warehouseCode;
     }
 
+    public void setWarehouseCode(String warehouseCode) {
+        this.warehouseCode = warehouseCode;
+    }
+
     public String getSubOrderCode() {
         return subOrderCode;
+    }
+
+    public void setSubOrderCode(String subOrderCode) {
+        this.subOrderCode = subOrderCode;
     }
 
     @Override

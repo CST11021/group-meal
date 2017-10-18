@@ -97,8 +97,8 @@ public class CompanyController {
     }
 
 
-    @RequestMapping("/exportCompanys")
-    public void exportCompanys(CompanyQueryVO queryVO, HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping("/exportCompany")
+    public void exportCompany(CompanyQueryVO queryVO, HttpServletRequest request, HttpServletResponse response) {
         List<GroupCompanyDO> companyDOList = companyService.queryAllByCondition(CompanyUtil.convertToDO(queryVO));
         List<Map<String, String>> records = CompanyUtil.convertToMap(companyDOList);
         List<String> headFields = Lists.newArrayList(new String[]{"ID","创建时间","修改时间","公司全称","公司简称"

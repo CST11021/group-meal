@@ -7,6 +7,7 @@ import com.group.meal.result.PageResult;
 import com.group.meal.service.local.company.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,18 +28,21 @@ public class CompanyServiceImpl implements CompanyService {
         return new PageResult(totalCount, companyDOList);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean save(GroupCompanyDO groupCompanyDO) {
         int count = groupCompanyDao.insert(groupCompanyDO);
         return count == 1 ? true : false;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean update(GroupCompanyDO groupCompanyDO) {
         int count = groupCompanyDao.updateByPrimaryKeySelective(groupCompanyDO);
         return count == 1 ? true : false;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public int mulDelete(List<Long> ids) {
         int count = groupCompanyDao.updateIsDelByIds(ids);

@@ -98,7 +98,7 @@ public class CompanySaveVO {
 
     @Override
     public String toString() {
-        return "CompanySaveVO{" +
+        return "ItemSaveVO{" +
                 "fullName='" + fullName + '\'' +
                 ", shortName='" + shortName + '\'' +
                 ", ownerCity='" + ownerCity + '\'' +

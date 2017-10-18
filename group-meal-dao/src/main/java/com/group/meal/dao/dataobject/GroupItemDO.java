@@ -27,6 +27,9 @@ public class GroupItemDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public GroupItemDO() {
+    }
+
     public GroupItemDO(Long id, Date gmtCreate, Date gmtModified, String skuName, BigDecimal price, String picturePath, String skuCode, Long categoryId, Byte status, Byte isDel) {
         this.id = id;
         this.gmtCreate = gmtCreate;
@@ -44,40 +47,80 @@ public class GroupItemDO implements Serializable {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Date getGmtCreate() {
         return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
     }
 
     public Date getGmtModified() {
         return gmtModified;
     }
 
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
+    }
+
     public String getSkuName() {
         return skuName;
+    }
+
+    public void setSkuName(String skuName) {
+        this.skuName = skuName;
     }
 
     public BigDecimal getPrice() {
         return price;
     }
 
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
     public String getPicturePath() {
         return picturePath;
+    }
+
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
     }
 
     public String getSkuCode() {
         return skuCode;
     }
 
+    public void setSkuCode(String skuCode) {
+        this.skuCode = skuCode;
+    }
+
     public Long getCategoryId() {
         return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public Byte getStatus() {
         return status;
     }
 
+    public void setStatus(Byte status) {
+        this.status = status;
+    }
+
     public Byte getIsDel() {
         return isDel;
+    }
+
+    public void setIsDel(Byte isDel) {
+        this.isDel = isDel;
     }
 
     @Override

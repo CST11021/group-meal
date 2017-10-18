@@ -1,35 +1,41 @@
 #set($title = "菜品管理")
 #set($layout = "/layout/default.vm")
 
-<input id="demo" type="text" name="" autocomplete="off" class="layui-input">
-##<div id="demo"></div>
+<div class="layui-row">
+    <div class="layui-col-xs3">
+        <input type="text" name="" autocomplete="off" class="layui-input">
+    </div>
+    <div class="layui-col-xs3">
+        <div id="demo" style="z-index: 99;"></div>
+    </div>
+</div>
 
 <script src="/static/layui/layui.all.js"></script>
 <script src="/static/js/common.js"></script>
 <script>
     layui.tree({
         elem: '#demo' //传入元素选择器
-        ,nodes: [
+        , nodes: [
             {//节点
                 name: '父节点1'
-                ,children: [{
-                    name: '子节点11'
-                },{
-                    name: '子节点12'
-                }]
-            },{
+                , children: [{
+                name: '子节点11'
+            }, {
+                name: '子节点12'
+            }]
+            }, {
                 name: '父节点2（可以点左侧箭头，也可以双击标题）'
-                ,children: [{
+                , children: [{
                     name: '子节点21'
-                    ,children: [{
+                    , children: [{
                         name: '子节点211'
                     }]
                 }]
             }]
-        ,click: function(node){
+        , click: function (node) {
             console.log(node) //node即为当前点击的节点数据
         }
-        ,dbclick:function(node) {
+        , dbclick: function (node) {
             debugger
         }
     });

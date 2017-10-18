@@ -12,17 +12,23 @@ public class GroupItemCategoryDO implements Serializable {
 
     private String categoryName;
 
+    private Long parentId;
+
     private Byte status;
 
     private Byte isDel;
 
     private static final long serialVersionUID = 1L;
 
-    public GroupItemCategoryDO(Long id, Date gmtCreate, Date gmtModified, String categoryName, Byte status, Byte isDel) {
+    public GroupItemCategoryDO() {
+    }
+
+    public GroupItemCategoryDO(Long id, Date gmtCreate, Date gmtModified, String categoryName, Long parentId, Byte status, Byte isDel) {
         this.id = id;
         this.gmtCreate = gmtCreate;
         this.gmtModified = gmtModified;
         this.categoryName = categoryName;
+        this.parentId = parentId;
         this.status = status;
         this.isDel = isDel;
     }
@@ -31,24 +37,56 @@ public class GroupItemCategoryDO implements Serializable {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Date getGmtCreate() {
         return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
     }
 
     public Date getGmtModified() {
         return gmtModified;
     }
 
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
+    }
+
     public String getCategoryName() {
         return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
     public Byte getStatus() {
         return status;
     }
 
+    public void setStatus(Byte status) {
+        this.status = status;
+    }
+
     public Byte getIsDel() {
         return isDel;
+    }
+
+    public void setIsDel(Byte isDel) {
+        this.isDel = isDel;
     }
 
     @Override

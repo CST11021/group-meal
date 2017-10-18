@@ -24,6 +24,9 @@ public class GroupMealRuleDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public GroupMealRuleDO() {
+    }
+
     public GroupMealRuleDO(Long id, Date gmtCreate, Date gmtModified, Long companyId, Byte weekDay, Byte mealType, Date mealStartTime, Date mealEndTime, Byte status) {
         this.id = id;
         this.gmtCreate = gmtCreate;
@@ -40,36 +43,72 @@ public class GroupMealRuleDO implements Serializable {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Date getGmtCreate() {
         return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
     }
 
     public Date getGmtModified() {
         return gmtModified;
     }
 
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
+    }
+
     public Long getCompanyId() {
         return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 
     public Byte getWeekDay() {
         return weekDay;
     }
 
+    public void setWeekDay(Byte weekDay) {
+        this.weekDay = weekDay;
+    }
+
     public Byte getMealType() {
         return mealType;
+    }
+
+    public void setMealType(Byte mealType) {
+        this.mealType = mealType;
     }
 
     public Date getMealStartTime() {
         return mealStartTime;
     }
 
+    public void setMealStartTime(Date mealStartTime) {
+        this.mealStartTime = mealStartTime;
+    }
+
     public Date getMealEndTime() {
         return mealEndTime;
     }
 
+    public void setMealEndTime(Date mealEndTime) {
+        this.mealEndTime = mealEndTime;
+    }
+
     public Byte getStatus() {
         return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 
     @Override

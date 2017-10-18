@@ -18,6 +18,9 @@ public class GroupCompanyItemRelDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public GroupCompanyItemRelDO() {
+    }
+
     public GroupCompanyItemRelDO(Long id, Date gmtCreate, Date gmtModified, Long companyId, String skuCode, Byte status) {
         this.id = id;
         this.gmtCreate = gmtCreate;
@@ -31,39 +34,59 @@ public class GroupCompanyItemRelDO implements Serializable {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Date getGmtCreate() {
         return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
     }
 
     public Date getGmtModified() {
         return gmtModified;
     }
 
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
+    }
+
     public Long getCompanyId() {
         return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 
     public String getSkuCode() {
         return skuCode;
     }
 
+    public void setSkuCode(String skuCode) {
+        this.skuCode = skuCode;
+    }
+
     public Byte getStatus() {
         return status;
     }
 
+    public void setStatus(Byte status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", gmtCreate=").append(gmtCreate);
-        sb.append(", gmtModified=").append(gmtModified);
-        sb.append(", companyId=").append(companyId);
-        sb.append(", skuCode=").append(skuCode);
-        sb.append(", status=").append(status);
-        sb.append("]");
-        return sb.toString();
+        return "GroupCompanyItemRelDO{" +
+                "id=" + id +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                ", companyId=" + companyId +
+                ", skuCode='" + skuCode + '\'' +
+                ", status=" + status +
+                '}';
     }
 }
