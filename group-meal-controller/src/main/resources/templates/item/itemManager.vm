@@ -1,42 +1,95 @@
 #set($title = "菜品管理")
 #set($layout = "/layout/default.vm")
 
+<link href="//cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
 <div class="layui-row">
     <div class="layui-col-xs3">
-        <input type="text" name="" autocomplete="off" class="layui-input">
-    </div>
-    <div class="layui-col-xs3">
-        <div id="demo" style="z-index: 99;"></div>
+        <input type="text" id="inp_id_category" name="" autocomplete="off" class="layui-input">
     </div>
 </div>
 
+
+##商品类名下拉树
+<div id="treeview" style="display: none;"></div>
+
+
+<script src="/static/bootstrap-treeview/js/bootstrap-treeview.js"></script>
 <script src="/static/layui/layui.all.js"></script>
 <script src="/static/js/common.js"></script>
 <script>
-    layui.tree({
-        elem: '#demo' //传入元素选择器
-        , nodes: [
-            {//节点
-                name: '父节点1'
-                , children: [{
-                name: '子节点11'
-            }, {
-                name: '子节点12'
-            }]
-            }, {
-                name: '父节点2（可以点左侧箭头，也可以双击标题）'
-                , children: [{
-                    name: '子节点21'
-                    , children: [{
-                        name: '子节点211'
-                    }]
-                }]
-            }]
-        , click: function (node) {
-            console.log(node) //node即为当前点击的节点数据
+    $("#treeview").css("width", $("#inp_id_category").css("width"));
+
+    // 渲染下拉树组件
+    var defaultData = [
+        {
+            text: 'Parent 1',
+            href: '#parent1',
+            tags: ['4'],
+            nodes: [
+                {
+                    text: 'Child 1',
+                    href: '#child1',
+                    tags: ['2'],
+                    nodes: [
+                        {
+                            text: 'Grandchild 1',
+                            href: '#grandchild1',
+                            tags: ['0']
+                        },
+                        {
+                            text: 'Grandchild 2',
+                            href: '#grandchild2',
+                            tags: ['0']
+                        }
+                    ]
+                },
+                {
+                    text: 'Child 2',
+                    href: '#child2',
+                    tags: ['0']
+                }
+            ]
+        },
+        {
+            text: 'Parent 2',
+            href: '#parent2',
+            tags: ['0']
         }
-        , dbclick: function (node) {
-            debugger
+    ];
+    $('#treeview').treeview({
+        data: defaultData
+        ,
+    });
+
+    // 类名组件点击事件
+    $("#inp_id_category").click(function () {
+        xOffset = 0;//向右偏移量
+        yOffset = 35;//向下偏移量
+        $("#treeview").css("position", "absolute")
+
+                .css("left", $("#inp_id_category").position().left + xOffset + "px")
+                .css("top", $("#inp_id_category").position().top + yOffset + "px").show();
+    });
+    // 判断鼠标在不在弹出层范围内
+    function checkIn(id) {
+        var yy = 20;   //偏移量
+        var str = "";
+        var x = window.event.clientX;
+        var y = window.event.clientY;
+        var obj = $("#" + id)[0];
+        if (x > obj.offsetLeft && x < (obj.offsetLeft + obj.clientWidth) && y > (obj.offsetTop - yy) && y < (obj.offsetTop + obj.clientHeight)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    // 点击body关闭弹出层
+    $(document).click(function () {
+        var is = checkIn("treeview");
+        if (!is) {
+            $("#treeview").hide();
         }
     });
+
 </script>
