@@ -1,69 +1,46 @@
-#set($title = "菜品管理")
+#set($title = "")
 #set($layout = "/layout/default.vm")
 
 <link href="//cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 
 <div class="layui-row">
     <div class="layui-col-xs3">
+        <input type="hidden" id="inp_id_categoryId" name="categoryId">
         <input type="text" id="inp_id_category" name="" autocomplete="off" class="layui-input">
+        ##商品类名下拉树
+        <div id="treeview" style="display: none;"></div>
     </div>
 </div>
-
-
-##商品类名下拉树
-<div id="treeview" style="display: none;"></div>
-
 
 <script src="/static/bootstrap-treeview/js/bootstrap-treeview.js"></script>
 <script src="/static/layui/layui.all.js"></script>
 <script src="/static/js/common.js"></script>
+##构建下拉树
 <script>
-    $("#treeview").css("width", $("#inp_id_category").css("width"));
 
-    // 渲染下拉树组件
-    var defaultData = [
-        {
-            text: 'Parent 1',
-            href: '#parent1',
-
-            nodes: [
-                {
-                    text: 'Child 1',
-                    href: '#child1',
-
-                    nodes: [
-                        {
-                            text: 'Grandchild 1',
-                            href: '#grandchild1'
-                        },
-                        {
-                            text: 'Grandchild 2',
-                            href: '#grandchild2'
-                        }
-                    ]
-                },
-                {
-                    text: 'Child 2',
-                    href: '#child2'
+    $.get('/category/nodes', function(res, status) {
+        if (status == 'success' && res.success) {
+            // 渲染下拉树组件
+            $('#treeview').treeview({
+                data: res.data
+            });
+            // 绑定选择事件
+            $('#treeview').on('nodeSelected', function(event, data) {
+                if (data.nodes == null) {
+                    $("#inp_id_category").val(data.id + " - " + data.text);
+                    $("#inp_id_categoryId").val(data.id);
+                    $("#treeview").hide();
                 }
-            ]
-        },
-        {
-            text: 'Parent 2',
-            href: '#parent2'
+            });
         }
-    ];
-    $('#treeview').treeview({
-        data: defaultData
-        ,
-    });
-
-    // 类名组件点击事件
+    })
+    // 设置下拉弹出层宽度
+    $("#treeview").css("width", $("#inp_id_category").css("width"));
+    // 类目输入框点击事件
     $("#inp_id_category").click(function () {
         xOffset = 0;//向右偏移量
         yOffset = 35;//向下偏移量
         $("#treeview").css("position", "absolute")
-
                 .css("left", $("#inp_id_category").position().left + xOffset + "px")
                 .css("top", $("#inp_id_category").position().top + yOffset + "px").show();
     });

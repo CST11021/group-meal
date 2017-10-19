@@ -2,9 +2,12 @@ package com.group.meal.dao.mapper;
 
 import com.group.meal.ApplicationTests;
 import com.group.meal.dao.dataobject.GroupItemCategoryDO;
+import com.group.meal.dao.query.BaseQueryDO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 public class GroupItemCategoryDaoTest extends ApplicationTests {
 
@@ -32,6 +35,24 @@ public class GroupItemCategoryDaoTest extends ApplicationTests {
     public void selectByPrimaryKey() throws Exception {
         GroupItemCategoryDO categoryDO = itemCategoryDao.selectByPrimaryKey(1L);
         Assert.assertNotEquals(null, categoryDO);
+    }
+
+    @Test
+    public void selectByConditionTest() throws Exception {
+        GroupItemCategoryDO categoryDO = new GroupItemCategoryDO();
+        categoryDO.setStatus((byte) 1);
+        List<GroupItemCategoryDO> categoryDOList = itemCategoryDao.selectByCondition(
+                new BaseQueryDO<GroupItemCategoryDO>(categoryDO, 1, 2));
+        System.out.println(categoryDOList);
+        categoryDOList = itemCategoryDao.selectByCondition(
+                new BaseQueryDO<GroupItemCategoryDO>(categoryDO, 0, 10));
+        System.out.println(categoryDOList);
+        categoryDOList = itemCategoryDao.selectByCondition(
+                new BaseQueryDO<GroupItemCategoryDO>(categoryDO, 1, 0));
+        System.out.println(categoryDOList);
+        categoryDOList = itemCategoryDao.selectByCondition(
+                new BaseQueryDO<GroupItemCategoryDO>(categoryDO));
+        System.out.println(categoryDOList);
     }
 
     @Test

@@ -23,6 +23,32 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
 
+    <select id="selectByCondition" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from group_item_category
+        <where>
+            <trim suffixOverrides="and">
+                <if test="queryParam.categoryName != null">
+                    category_name = #{queryParam.categoryName,jdbcType=VARCHAR} and
+                </if>
+                <if test="queryParam.parentId != null">
+                    parent_id = #{queryParam.parentId,jdbcType=VARCHAR} and
+                </if>
+                <if test="queryParam.status != null">
+                    status = #{queryParam.status,jdbcType=TINYINT} and
+                </if>
+                <if test="queryParam.isDel != null">
+                    is_del = #{queryParam.isDel,jdbcType=TINYINT} and
+                </if>
+            </trim>
+        </where>
+        order by gmt_create desc
+        <if test="currentPage > 0 and pageSize > 0">
+            limit #{startRow,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
+        </if>
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from group_item_category
         where id = #{id,jdbcType=BIGINT}
