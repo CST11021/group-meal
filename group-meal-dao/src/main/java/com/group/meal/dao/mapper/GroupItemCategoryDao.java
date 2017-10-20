@@ -15,6 +15,8 @@ public interface GroupItemCategoryDao {
 
     List<GroupItemCategoryDO> selectByCondition(BaseQueryDO<GroupItemCategoryDO> param);
 
+    Long countByCondition(BaseQueryDO<GroupItemCategoryDO> param);
+
     int updateByPrimaryKeySelective(GroupItemCategoryDO record);
 
 }

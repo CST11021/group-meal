@@ -1,32 +1,57 @@
-#set($title = "")
+#set($title = "类目管理")
 #set($layout = "/layout/default.vm")
 
 <link href="//cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 
+##类目下拉框
 <div class="layui-row">
-    <div class="layui-col-xs3">
-        <input type="hidden" id="inp_id_categoryId" name="categoryId">
-        <input type="text" id="inp_id_category" name="" autocomplete="off" class="layui-input">
-        ##商品类名下拉树
-        <div id="treeview" style="display: none;"></div>
+    <div class="layui-col-md3">
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: auto;">菜品类别</label>
+            <div class="layui-input-block">
+                <input type="hidden" id="inp_id_categoryId" name="categoryId">
+                <input type="text" id="inp_id_category" name="" autocomplete="off" class="layui-input">
+                ##商品类名下拉树
+                <div id="treeview" style="display: none;z-index: 99"></div>
+            </div>
+        </div>
     </div>
 </div>
+##添加按钮
+<div class="layui-btn-group">
+    <button class="layui-btn" id="addCategoryBtn">增加菜品类别</button>
+    <button class="layui-btn" id="deleteCategoryBtn">批量删除</button>
+    <button class="layui-btn" id="queryCategoryBtn">查询</button>
+</div>
+<table id="category_table" lay-filter="lf_category_table"></table>
 
 <script src="/static/bootstrap-treeview/js/bootstrap-treeview.js"></script>
 <script src="/static/layui/layui.all.js"></script>
 <script src="/static/js/common.js"></script>
+<script type="text/html" id="oparatorBar">
+    <form class="layui-form" id="form_id_toolBar">
+        {{#  if(d.status == 1) {  }}
+        <a lay-event="changeStatus" style="color: green;cursor: pointer;text-decoration: underline;">启用</a>&nbsp;&nbsp;
+        {{#  } else {  }}
+        <a lay-event="changeStatus" style="color: red;cursor: pointer;text-decoration: underline;">停用</a>&nbsp;&nbsp;
+        {{#  }  }}
+        <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
+        <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+    </form>
+</script>
 ##构建下拉树
 <script>
 
-    $.get('/category/nodes', function(res, status) {
+    $.get('/category/nodes', function (res, status) {
         if (status == 'success' && res.success) {
             // 渲染下拉树组件
             $('#treeview').treeview({
                 data: res.data
             });
             // 绑定选择事件
-            $('#treeview').on('nodeSelected', function(event, data) {
-                if (data.nodes == null) {
+            $('#treeview').on('nodeSelected', function (event, data) {
+                if (data.nodes != null) {
                     $("#inp_id_category").val(data.id + " - " + data.text);
                     $("#inp_id_categoryId").val(data.id);
                     $("#treeview").hide();
@@ -65,4 +90,82 @@
         }
     });
 
+</script>
+<script>
+    // 渲染表格
+    var table = layui.table;
+    var cols = [[
+        {checkbox: true, fixed: true}
+        , {field: 'id', title: 'ID', width: 50, fixed: 'left'}
+        , {field: 'gmtCreate', title: '创建时间', width: 180}
+        , {field: 'gmtModified', title: '修改时间', width: 180}
+        , {field: 'status', title: '状态', width: 80}
+        , {field: 'categoryName', title: '类目名称', width: 200}
+        , {field: 'parentId', title: '父节点ID', width: 150}
+        , {fixed: 'right', width: 250, align: 'center', toolbar: '#oparatorBar'}
+    ]];
+    table.render({
+        id: 'categoryTable'
+        , elem: '#category_table' //指定原始表格元素选择器（推荐id选择器）
+        , url: '/category/query'
+        , method: 'post'
+        , request: request
+        , response: response
+        , cols: cols
+        , page: true
+        , limit: 10
+        , loading: true
+        , even: true //开启隔行背景
+    });
+</script>
+<script>
+    $("#addCategoryBtn").on("click", function () {
+        layer.prompt({title: '请求输入类目名称', formType: 3}, function (data, index) {
+
+            $.post("/category/save", {
+                "categoryName": data
+                , "parentId": $("#inp_id_categoryId").val()
+            }, function (res, status) {
+                if (res.success) {
+                    layer.msg("添加成功！", {icon: 1});
+                    layer.close(index);
+                } else {
+                    layer.msg("添加失败！", {icon: 2});
+                }
+            })
+        });
+    });
+    $("#queryCategoryBtn").on("click", function () {
+        // 查询绑定
+        table.reload('categoryTable', {
+            where: {
+                categoryId: $("#inp_id_categoryId").val()
+            }
+        });
+
+    })
+</script>
+<script>
+    table.on('tool(lf_category_table)', function (obj) {
+        curRowObj = obj;
+        var data = obj.data;
+        if (obj.event === 'changeStatus') {
+            layer.msg(data.status);
+        }else if (obj.event === 'detail') {
+            layer.msg('ID：' + data.id + ' 的查看操作');
+        } else if (obj.event === 'del') {
+            layer.confirm('真的删除行么', function (index) {
+                layer.close(index);
+            });
+        } else if (obj.event === 'edit') {
+            updateCompanyLayer = layer.open({
+                type: 1
+                , content: ""
+                , area: ['500px', '620px']
+                , end: function () {
+
+                }
+            });
+        }
+    });
 </script>

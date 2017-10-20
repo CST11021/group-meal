@@ -52,7 +52,7 @@
     </div>
 </form>
 ##新增、查询、批量删除和导出
-<div class="layui-row">
+<div class="layui-btn-group">
     <button id="btn_id_addCompany" class="layui-btn" lay-filter="addCompany">新增</button>
     <button id="btn_id_queryCompany" class="layui-btn" lay-filter="queryCompany">查询</button>
     <button id="btn_id_mulDelete" class="layui-btn" lay-filter="deleteCompanys">批量删除</button>

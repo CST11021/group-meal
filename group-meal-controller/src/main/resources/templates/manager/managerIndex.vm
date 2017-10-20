@@ -1,6 +1,7 @@
 <ul class="layui-nav" lay-filter="">
     <li class="layui-nav-item layui-this"><a class="menu-item" href="/company/manager" target="manager">企业管理</a></li>
     <li class="layui-nav-item"><a class="menu-item" href="/item/manager" target="manager">菜品管理</a></li>
+    <li class="layui-nav-item"><a class="menu-item" href="/category/manager" target="manager">菜品类目管理</a></li>
     <li class="layui-nav-item"><a class="menu-item" href="/order/query" target="manager">订单管理</a></li>
     <li class="layui-nav-item">
         <a href="/hello" target="manager" href="javascript:;">解决方案</a>

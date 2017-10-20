@@ -62,6 +62,14 @@ public class BaseResult<T> implements Serializable {
         return result;
     }
 
+    public static BaseResult makeFail(String code, String msg) {
+        BaseResult result = new BaseResult();
+        result.setSuccess(false);
+        result.setCode(code);
+        result.setMsg(msg);
+        return result;
+    }
+
     public T getData() {
         return data;
     }

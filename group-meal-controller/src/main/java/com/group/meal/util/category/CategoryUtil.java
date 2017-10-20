@@ -3,8 +3,11 @@ package com.group.meal.util.category;
 import com.google.common.collect.Lists;
 import com.group.meal.dao.dataobject.GroupItemCategoryDO;
 import com.group.meal.result.BaseResult;
+import com.group.meal.result.PageResult;
+import com.group.meal.result.http.HttpResponsePageResult;
 import com.group.meal.vo.category.CategoryNodeVO;
 import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.BeanUtils;
 
 import java.util.List;
 
@@ -15,6 +18,13 @@ import static java.util.stream.Collectors.toList;
  * @create 2017/10/19 15:03
  */
 public class CategoryUtil {
+
+    public static HttpResponsePageResult<List<GroupItemCategoryDO>> convert(PageResult<List<GroupItemCategoryDO>> pageResult) {
+        HttpResponsePageResult<List<GroupItemCategoryDO>> httpResponseResult = new HttpResponsePageResult();
+        BeanUtils.copyProperties(pageResult, httpResponseResult);
+        return httpResponseResult;
+    }
+
 
     public static BaseResult<List<CategoryNodeVO>> convert(List<GroupItemCategoryDO> categoryDOList) {
         List<CategoryNodeVO> oneLevelNodeVOList = findOneLevelNodes(categoryDOList);
