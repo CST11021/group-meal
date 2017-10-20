@@ -55,7 +55,7 @@ public class ResultCacheManager {
 	public void deleteResultCache(long timeToLiveMinutes){
 		//自己写过滤方法，不使用google的Maps的过滤方法，google的过滤方法返回的不是ConcurrentMap对象
 		Set<String> resultKeys = new HashSet();
-		long now = new Date().getTime();
+		long now = System.currentTimeMillis();
 		for(String resultKey : resultCaches.keySet()){
 			CacheResult result = resultCaches.get(resultKey);
 			if(now - result.getCreateTime() > timeToLiveMinutes * 60 * 1000){
@@ -81,7 +81,7 @@ public class ResultCacheManager {
 		
 		public CacheResult(Object result){
 			this.result = result;
-			this.createTime = new Date().getTime();
+			this.createTime = System.currentTimeMillis();
 		}
 
 		public Object getResult() {

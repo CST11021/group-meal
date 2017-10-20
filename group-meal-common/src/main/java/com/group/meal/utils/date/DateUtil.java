@@ -273,8 +273,9 @@ public class DateUtil {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int weekIndex = cal.get(Calendar.DAY_OF_WEEK) - 1;
-        if (weekIndex < 0)
+        if (weekIndex < 0) {
             weekIndex = 0;
+        }
         return weekDays[weekIndex];
     }
 
