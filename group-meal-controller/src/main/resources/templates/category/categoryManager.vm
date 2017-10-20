@@ -12,7 +12,11 @@
                 <input type="hidden" id="inp_id_categoryId" name="categoryId">
                 <input type="text" id="inp_id_category" name="" autocomplete="off" class="layui-input">
                 ##商品类名下拉树
-                <div id="treeview" style="display: none;z-index: 99"></div>
+                <div id="treeview" style="display: none;z-index: 99">
+                    <div align="right">
+                        <a href="javascript:viod(0);" id="closed"><font color="#000">关闭</font></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -91,8 +95,8 @@
     });
 
 </script>
+##渲染表格
 <script>
-    // 渲染表格
     var table = layui.table;
     var cols = [[
         {checkbox: true, fixed: true}
@@ -118,6 +122,7 @@
         , even: true //开启隔行背景
     });
 </script>
+##添加、查询按钮绑定
 <script>
     $("#addCategoryBtn").on("click", function () {
         layer.prompt({title: '请求输入类目名称', formType: 3}, function (data, index) {
@@ -136,15 +141,14 @@
         });
     });
     $("#queryCategoryBtn").on("click", function () {
-        // 查询绑定
         table.reload('categoryTable', {
             where: {
                 categoryId: $("#inp_id_categoryId").val()
             }
         });
-
-    })
+    });
 </script>
+##toolbar绑定
 <script>
     table.on('tool(lf_category_table)', function (obj) {
         curRowObj = obj;

@@ -22,4 +22,11 @@ public interface ItemCategoryService {
      */
     int save(GroupItemCategoryDO categoryDO);
 
+    /**
+     * 删除类目（同时删除该类目下的所有子类目）
+     * @param categoryId
+     * @return
+     */
+    int delete(Long categoryId);
+
 }

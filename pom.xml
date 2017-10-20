@@ -39,6 +39,7 @@
         <commons-dbcp>1.4</commons-dbcp>
         <commons-lang3>3.6</commons-lang3>
         <google-collections>1.0</google-collections>
+        <guava>18.0</guava>
         <poi-ooxml>3.16</poi-ooxml>
     </properties>
 
@@ -85,10 +86,15 @@
                 <version>${commons-lang3}</version>
             </dependency>
             <!--google-collections工具类-->
+            <!--<dependency>-->
+                <!--<groupId>com.google.collections</groupId>-->
+                <!--<artifactId>google-collections</artifactId>-->
+                <!--<version>${google-collections}</version>-->
+            <!--</dependency>-->
             <dependency>
-                <groupId>com.google.collections</groupId>
-                <artifactId>google-collections</artifactId>
-                <version>${google-collections}</version>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava}</version>
             </dependency>
             <!--poi-ooxml工具类-->
             <dependency>

@@ -76,4 +76,11 @@ public class CategoryController {
         return BaseResult.makeSuccess();
     }
 
+    @ResponseBody
+    @RequestMapping("/delete")
+    public BaseResult<Void> delete(@RequestParam(value = "categoryId") Long categoryId) {
+        itemCategoryService.delete(categoryId);
+        return BaseResult.makeSuccess();
+    }
+
 }
