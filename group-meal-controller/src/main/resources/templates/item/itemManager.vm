@@ -3,20 +3,46 @@
 
 <link href="//cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 
-<div class="layui-row">
-    <div class="layui-col-xs3">
-        <input type="text" id="inp_id_category" name="" autocomplete="off" class="layui-input">
+<form class="layui-form" id="form_id_query">
+    <div class="layui-row">
+        <div class="layui-col-md3">
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: auto;">商品类目：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="inp_id_category" name="" autocomplete="off" class="layui-input">
+                    ##商品类名下拉树
+                    <div id="treeview" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md3">
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: auto;">商品名称：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="skuName" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md3">
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: auto;">是否启用：</label>
+                <div class="layui-input-block">
+                    <select name="status" lay-verify="required">
+                        <option value=""></option>
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-
-
-##商品类名下拉树
-<div id="treeview" style="display: none;"></div>
-
+</form>
+<table id="item_table" lay-filter="lf_item_table"></table>
 
 <script src="/static/bootstrap-treeview/js/bootstrap-treeview.js"></script>
 <script src="/static/layui/layui.all.js"></script>
 <script src="/static/js/common.js"></script>
+##类目下拉树渲染
 <script>
     $("#treeview").css("width", $("#inp_id_category").css("width"));
 
@@ -67,6 +93,7 @@
                 .css("left", $("#inp_id_category").position().left + xOffset + "px")
                 .css("top", $("#inp_id_category").position().top + yOffset + "px").show();
     });
+
     // 判断鼠标在不在弹出层范围内
     function checkIn(id) {
         var yy = 20;   //偏移量
@@ -80,6 +107,7 @@
             return false;
         }
     }
+
     // 点击body关闭弹出层
     $(document).click(function () {
         var is = checkIn("treeview");
@@ -88,4 +116,34 @@
         }
     });
 
+</script>
+<script>
+    // 渲染表格
+    var table = layui.table;
+    var cols = [[
+        {checkbox: true, fixed: true}
+        , {field: 'id', title: 'ID', width: 50, fixed: 'left'}
+        , {field: 'gmtCreate', title: '创建时间', width: 180}
+        , {field: 'gmtModified', title: '修改时间', width: 180}
+        , {field: 'status', title: '状态', width: 80}
+        , {field: 'fullName', title: '商品名称', width: 200}
+        , {field: 'shortName', title: '价格', width: 150}
+        , {field: 'ownerCity', title: '图片路径', width: 100}
+        , {field: 'area', title: '商品编码', width: 150}
+        , {field: 'address', title: '类目ID', width: 200}
+        , {fixed: 'right', width: 250, align: 'center', toolbar: '#oparatorBar'}
+    ]];
+    table.render({
+        id: 'itemTable'
+        , elem: '#item_table' //指定原始表格元素选择器（推荐id选择器）
+        , url: '/item/query'
+        , method: 'post'
+        , request: request
+        , response: response
+        , cols: cols
+        , page: true
+        , limit: 10
+        , loading: true
+        , even: true //开启隔行背景
+    });
 </script>

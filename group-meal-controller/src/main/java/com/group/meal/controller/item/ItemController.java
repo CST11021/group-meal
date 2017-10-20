@@ -40,9 +40,9 @@ public class ItemController {
 
     @ResponseBody
     @RequestMapping("/query")
-    public HttpResponsePageResult<List<ItemResultVO>> query(@RequestParam("categoryIds[]") Long[] categoryIds,
-                                                            @RequestParam("skuName") String skuName,
-                                                            @RequestParam("status") Byte status) {
+    public HttpResponsePageResult<List<ItemResultVO>> query(@RequestParam(value = "categoryIds[]", required = false) Long[] categoryIds,
+                                                             @RequestParam(value = "skuName", required = false) String skuName,
+                                                             @RequestParam(value = "status", required = false) Byte status) {
 
         PageResult<List<GroupItemDO>> pageResult = itemService.queryPageByCondition(categoryIds, skuName, status);
         return ItemUtil.convert(pageResult);
