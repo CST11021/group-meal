@@ -74,8 +74,9 @@ public class ItemCategoryServiceImpl implements ItemCategoryService{
         List<Long> ids = categories.stream()
                 .map(GroupItemCategoryDO::getId)
                 .collect(Collectors.toList());
-
-        return categoryDao.deleteByIds(ids);
+        int count = categoryDao.deleteByIds(ids);
+        refreshCategories();
+        return count;
     }
 
     /**
