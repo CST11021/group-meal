@@ -1,5 +1,8 @@
 package com.group.meal.service.local.company.impl;
 
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.group.meal.dao.dataobject.GroupCompanyDO;
 import com.group.meal.dao.mapper.GroupCompanyDao;
 import com.group.meal.dao.model.item.QueryItemModel;
@@ -48,6 +51,15 @@ public class CompanyServiceImpl implements CompanyService {
     public int mulDelete(List<Long> ids) {
         int count = groupCompanyDao.updateIsDelByIds(ids);
         return count;
+    }
+
+    @Override
+    public PageInfo<GroupCompanyDO> queryPage(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<GroupCompanyDO> deskDOS = groupCompanyDao.selectAll();
+        PageInfo pageInfo = new PageInfo<>(deskDOS);
+         //pageInfo.getList();返回当前页数据信息
+        return pageInfo;
     }
 
     @Override

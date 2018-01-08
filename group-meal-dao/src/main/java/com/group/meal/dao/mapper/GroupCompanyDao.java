@@ -46,6 +46,12 @@ public interface GroupCompanyDao {
     List<GroupCompanyDO> selectByCondition(BaseQueryDO<GroupCompanyDO> condition);
 
     /**
+     * 查找所有
+     * @return
+     */
+    List<GroupCompanyDO> selectAll();
+
+    /**
      * 根据查询条件返回总记录数
      * @param condition
      * @return

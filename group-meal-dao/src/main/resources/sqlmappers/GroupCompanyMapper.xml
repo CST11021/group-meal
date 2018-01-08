@@ -136,6 +136,9 @@
             </where>
         </trim>
     </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT * from group_company
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from group_company
         where id = #{id,jdbcType=BIGINT}

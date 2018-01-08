@@ -1,5 +1,6 @@
 package com.group.meal.controller.company;
 
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.group.meal.dao.dataobject.GroupCompanyDO;
 import com.group.meal.dao.query.BaseQueryDO;
@@ -48,6 +49,17 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
+    /**
+     * 测试分页插件
+     * @return
+     */
+    @RequestMapping("/testPageHelperPlugin")
+    public ModelAndView testPageHelperPlugin() {
+        PageInfo<GroupCompanyDO> pageInfo = companyService.queryPage(1, 3);
+        return null;
+    }
+
+
     @RequestMapping("/manager")
     public ModelAndView manager(CompanyQueryVO queryVO) {
         return new ModelAndView("/company/companyManager");
@@ -95,7 +107,6 @@ public class CompanyController {
         int count = companyService.mulDelete(Lists.newArrayList(ids));
         return BaseResult.makeSuccess(count).setMsg("成功删除了" + count + "条记录");
     }
-
 
     @RequestMapping("/exportCompany")
     public void exportCompany(CompanyQueryVO queryVO, HttpServletRequest request, HttpServletResponse response) {
