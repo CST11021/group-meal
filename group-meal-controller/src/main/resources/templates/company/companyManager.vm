@@ -263,14 +263,35 @@
 
     // 查询绑定
     $('#btn_id_queryCompany').on('click', function () {
-        table.reload('companyTable', {
-            where: {
-                fullName: $("#id_fullName").val()
-                , status: $("#id_status").val()
-                , ownerCity: $("#id_ownerCity").val()
-                , area: $("#id_area").val()
+        // table.reload('companyTable', {
+        //     where: {
+        //         fullName: $("#id_fullName").val()
+        //         , status: $("#id_status").val()
+        //         , ownerCity: $("#id_ownerCity").val()
+        //         , area: $("#id_area").val()
+        //     }
+        // });
+        // $.get('http://localhost:8080/abc.html?param=whz', function (result) {
+        //     alert(result);
+        // });
+
+        $.ajax({
+            url:"http://localhost:8080/abc.html?param=whz",
+            type:"get",
+            async:false,
+            dataType : "jsonp",
+            //服务端用于接收callback调用的function名的参数
+            jsonp:"callbackparam",
+            //callback的function名称
+            jsonpCallback:"success_jsonpCallback",
+            success:function(data){
+                console.log(data);
+            },
+            error:function(data){
+                console.log(data);
             }
         });
+
     });
 
     // 新增绑定
