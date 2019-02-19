@@ -5,7 +5,6 @@ import com.group.meal.result.BaseResult;
 import com.group.meal.result.PageResult;
 import com.group.meal.result.http.HttpResponsePageResult;
 import com.group.meal.service.local.item.ItemService;
-import com.group.meal.util.base.BaseUtil;
 import com.group.meal.util.item.ItemUtil;
 import com.group.meal.vo.item.ItemQueryVO;
 import com.group.meal.vo.item.ItemResultVO;
@@ -35,7 +34,7 @@ public class ItemController {
 
     @RequestMapping("/manager")
     public ModelAndView query() {
-        return new ModelAndView("/item/itemManager");
+        return new ModelAndView("item/itemManager");
     }
 
     @ResponseBody

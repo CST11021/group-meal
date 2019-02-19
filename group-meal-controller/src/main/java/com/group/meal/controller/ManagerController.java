@@ -14,6 +14,14 @@ public class ManagerController {
 
     @RequestMapping("/index")
     public ModelAndView index() {
+
+        // String a = "";
+        // boolean flag = StringUtils.isBlank(a);
+        // while (flag) {
+        //     a = a + "王宏展";
+        //     System.out.println(a);
+        // }
+
         return new ModelAndView("manager/managerIndex");
     }
 

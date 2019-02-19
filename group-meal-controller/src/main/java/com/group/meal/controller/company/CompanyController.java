@@ -24,7 +24,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.support.HttpRequestHandlerServlet;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -62,7 +61,7 @@ public class CompanyController {
 
     @RequestMapping("/manager")
     public ModelAndView manager(CompanyQueryVO queryVO) {
-        return new ModelAndView("/company/companyManager");
+        return new ModelAndView("company/companyManager");
     }
 
     @ResponseBody

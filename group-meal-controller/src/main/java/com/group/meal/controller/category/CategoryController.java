@@ -35,7 +35,7 @@ public class CategoryController {
 
     @RequestMapping("/manager")
     public ModelAndView manager() {
-        return new ModelAndView("/category/categoryManager");
+        return new ModelAndView("category/categoryManager");
     }
 
     @ResponseBody

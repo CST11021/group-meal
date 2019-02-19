@@ -14,7 +14,7 @@ public class OrderController {
 
     @RequestMapping("/query")
     public ModelAndView query() {
-        return new ModelAndView("/order/orderManager");
+        return new ModelAndView("order/orderManager");
     }
 
 }
